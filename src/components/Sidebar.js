@@ -65,8 +65,9 @@ export default class Sidebar extends PureComponent {
               onChange={(e, value) => onChangeInvitationsCount(value)}
               name="invitationCount"
             >
-            {COUNT_GROUP.map(count => (
+            {COUNT_GROUP.map((count, key) => (
               <RadioButton
+                key={key}
                 value={count.toString()}
                 label={count}
                 style={style.radioButton}

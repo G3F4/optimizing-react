@@ -12,7 +12,8 @@
     "react": "^15.5.4",
     "react-addons-shallow-compare": "^15.5.2",
     "react-dom": "^15.5.4",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "why-did-you-update": "0.0.8"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

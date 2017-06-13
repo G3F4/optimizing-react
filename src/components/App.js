@@ -29,16 +29,17 @@ class App extends Component {
   };
 
   componentWillUpdate() {
-    this.start = Date.now();
+    this.time = Date.now();
   }
 
-  componentDidUpdate() {
-    if (this.ignoreUpdate) {
-      this.ignoreUpdate = false;
-    } else {
-      this.ignoreUpdate = true;
+  componentDidUpdate(prevProps, prevState) {
+    this.refreshTimes(this.state.times === prevState.times);
+  }
+  
+  refreshTimes(hasTimeChanged) {
+    if (hasTimeChanged) {
       this.setState({ times: [
-        Date.now() - this.start,
+        Date.now() - this.time,
         ...this.state.times,
       ] });
     }

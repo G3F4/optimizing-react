@@ -7,8 +7,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 const rootEl = document.getElementById('root');
+const AppContainer = () => (
+  <MuiThemeProvider>
+    <App />
+  </MuiThemeProvider>
+);
 
-ReactDOM.render(<MuiThemeProvider><App /></MuiThemeProvider>, rootEl);
+ReactDOM.render(<AppContainer />, rootEl);
 
 if (module.hot) {
   module.hot.accept('./components/App', () => {

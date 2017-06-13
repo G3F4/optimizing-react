@@ -8,27 +8,21 @@ body {
 
 .App {
   margin: 5px;
-  width: 98vw;
+  width: 99vw;
   height: 98vh;
-  overflow: hidden;
 }
 
 .Sidebar {
   float: left;
   width: 20%;
-  margin-right: 10px;
-  margin-left: 5px;
+  height: 100%;
   overflow: hidden;
 }
 
 .Box {
   float: left;
-  width: 78%;
+  width: 80%;
   height: 100%;
-}
-
-.Invitations {
-
 }
 
 .times {

@@ -37,6 +37,7 @@ const style = {
   },
 };
 const SEND_BY_RADIO_GROUP = ['E-mail', 'Fax', 'Postman', 'Owl'];
+const GENDERS = ['Man', 'Woman', 'Gender'];
 
 class Invitation extends Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -146,9 +147,13 @@ class Invitation extends Component {
                 autoWidth={true}
                 onChange={this.onSexChange}
               >
-                <MenuItem value={0} primaryText="Man" />
-                <MenuItem value={1} primaryText="Woman" />
-                <MenuItem value={2} primaryText="Gender" />
+              {GENDERS.map((primaryText, value) => (
+                <MenuItem
+                  key={value}
+                  value={value}
+                  primaryText={primaryText}
+                />
+              ))}
               </SelectField>
             </div>
             <div>
@@ -263,30 +268,36 @@ export default class Invitations extends Component {
 
   getInvitationProps = moize(getInvitationProps);
 
+  getAppBar() {
+    return (
+      <AppBar
+        title="Invitations"
+        iconElementLeft={<span />}
+        iconElementRight={
+          <span>
+            <FlatButton label="Save all" onClick={this.onSaveAll} />
+            <FlatButton label="Edit all" onClick={this.onEditAll} />
+          </span>
+        }
+      />
+    );
+  }
+
+  onSaveAll = () => this.props.updateInvitations({
+    $apply: invitations => invitations.map(invitation => ({ ...invitation, expanded: false }))
+  });
+
+  onEditAll = () => this.props.updateInvitations({
+    $apply: invitations => invitations.map(invitation => ({ ...invitation, expanded: true }))
+  });
+
   render() {
-    const { invitations, onSaveAll, onEditAll, updateInvitations, memoize, scu } = this.props;
+    const { invitations, updateInvitations, memoize, scu } = this.props;
 
     return (
       <div className="Box">
-        <Paper style={style.paper} zDepth={1}>
-          <AppBar
-            title="Invitations"
-            iconElementLeft={<span />}
-            iconElementRight={
-              <span>
-                <FlatButton label="Save all" onClick={() => {
-                  updateInvitations({
-                    $apply: invitations => invitations.map(invitation => ({ ...invitation, expanded: false }))
-                  });
-                }} />
-                <FlatButton label="Edit all" onClick={() => {
-                  updateInvitations({
-                    $apply: invitations => invitations.map(invitation => ({ ...invitation, expanded: true }))
-                  });
-                }} />
-              </span>
-            }
-          />
+        <Paper style={style.paper} zDepth={5}>
+          {this.getAppBar()}
           <div className="Invitations">
             {invitations.map(invitation => (
             <Invitation
@@ -296,16 +307,7 @@ export default class Invitations extends Component {
             />
           ))}
           </div>
-          <AppBar
-            title="Invitations"
-            iconElementLeft={<span />}
-            iconElementRight={
-              <span>
-                <FlatButton label="Save all" onClick={() => onSaveAll()} />
-                <FlatButton label="Edit all" onClick={() => onEditAll()} />
-              </span>
-            }
-          />
+          {this.getAppBar()}
         </Paper>
       </div>
     );
