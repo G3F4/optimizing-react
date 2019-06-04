@@ -1,9 +1,13 @@
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Switch from '@material-ui/core/Switch';
 import React, { PureComponent } from 'react';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import Paper from 'material-ui/Paper';
-import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
 const style = {
   toggle: {
@@ -40,46 +44,57 @@ export default class Sidebar extends PureComponent {
 
     return (
       <div className="Sidebar">
-        <Paper style={style.paper} zDepth={1}>
+        <Paper style={style.paper}>
           <h3>Optimizations</h3>
           <div>
-            <Toggle
-              toggled={scu}
-              onToggle={toggleSCU}
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  checked={scu}
+                  onChange={toggleSCU}
+                  style={style.toggle}
+                />
+              }
               label="PureComponent"
-              labelPosition="right"
-              style={style.toggle}
             />
-            <Toggle
-              toggled={memoize}
-              onToggle={toggleMemoize}
+            <FormControlLabel
+              control={
+                <Switch
+                  color="primary"
+                  checked={memoize}
+                  onChange={toggleMemoize}
+                  style={style.toggle}
+                />
+              }
               label="Memoization"
-              labelPosition="right"
-              style={style.toggle}
             />
           </div>
           <h3>Invitations count:</h3>
-          <div>
-            <RadioButtonGroup
-              valueSelected={invitationsCount.toString()}
+          <FormControl>
+            <FormLabel component="legend">invitationCount</FormLabel>
+            <RadioGroup
               onChange={(e, value) => onChangeInvitationsCount(value)}
+              aria-label="invitationCount"
               name="invitationCount"
+              value={invitationsCount.toString()}
             >
             {COUNT_GROUP.map((count, key) => (
-              <RadioButton
+              <FormControlLabel
                 key={key}
                 value={count.toString()}
                 label={count}
                 style={style.radioButton}
+                control={<Radio color="primary" />}
+                labelPlacement="start"
               />
             ))}
-            </RadioButtonGroup>
-            <FlatButton
-              label="Double count"
-              fullWidth={true}
+            </RadioGroup>
+            <Button
               onClick={() => onChangeInvitationsCount(invitationsCount * 2)}
-            />
-          </div>
+              fullWidth
+            >Double count</Button>
+          </FormControl>
           <h3>Update delta:</h3>
           <div className="times">
           {times.map((time, index) => 48 - index * 3 > 0 && (
