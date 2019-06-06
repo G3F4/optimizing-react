@@ -1,29 +1,37 @@
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary/ExpansionPanelSummary';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import InputLabel from '@material-ui/core/InputLabel/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Paper from '@material-ui/core/Paper';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import Toolbar from '@material-ui/core/Toolbar/Toolbar';
+import Typography from '@material-ui/core/Typography/Typography';
 import React, { Component } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import PropTypes from 'prop-types';
-import Paper from 'material-ui/Paper';
-import AppBar from 'material-ui/AppBar';
-import SelectField from 'material-ui/SelectField';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import Checkbox from 'material-ui/Checkbox';
-import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
-import TextField from 'material-ui/TextField';
-import MenuItem from 'material-ui/MenuItem';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import moize from 'moize';
 
 const style = {
+  wrapper: {
+    flexGrow: 1,
+  },
   paper: {
     height: '100%',
     width: '100%',
     padding: 5,
     display: 'inline-block',
     overflowY: 'scroll',
-  },
-  title: {
-    cursor: 'pointer',
   },
   root: {
     display: 'flex',
@@ -34,6 +42,9 @@ const style = {
     height: '100%',
     width: '100%',
     overflowY: 'auto',
+  },
+  title: {
+    flexGrow: 1,
   },
 };
 const SEND_BY_RADIO_GROUP = ['E-mail', 'Fax', 'Postman', 'Owl'];
@@ -50,132 +61,130 @@ class Invitation extends Component {
     return true;
   }
 
-  onNameChange = (e, value) => {
+  onNameChange = event => {
     if (this.props.onNameChange) {
-      this.props.onNameChange(value);
+      this.props.onNameChange(event.target.value);
     }
   };
 
-  onLastNameChange = (e, value) => {
+  onLastNameChange = event => {
     if (this.props.onLastNameChange) {
-      this.props.onLastNameChange(value);
+      this.props.onLastNameChange(event.target.value);
     }
   };
 
-  onPlusOneChange = (e, value) => {
+  onPlusOneChange = event => {
     if (this.props.onPlusOneChange) {
-      this.props.onPlusOneChange(value);
+      this.props.onPlusOneChange(event.target.checked);
     }
   };
 
-  onSexChange = (e, value) => {
+  onSexChange = event => {
     if (this.props.onSexChange) {
-      this.props.onSexChange(value);
+      this.props.onSexChange(event.target.value);
     }
   };
 
-  onTableChange = (e, value) => {
+  onTableChange = event => {
     if (this.props.onTableChange) {
-      this.props.onTableChange(value);
+      this.props.onTableChange(event.target.value);
     }
   };
 
-  onSendByChange = (e, value) => {
+  onSendByChange = event => {
     if (this.props.onSendByChange) {
-      this.props.onSendByChange(value);
+      this.props.onSendByChange(event.target.value);
     }
   };
 
 
   render() {
-    const { id, expanded, onInvitationToggle, guestInfo } = this.props;
+    const { expanded, onInvitationToggle, guestInfo } = this.props;
     const { name, lastName, sex, plusOne, sendBy, table } = guestInfo;
 
     return (
-      <Card
-        key={id}
-        expanded={expanded}
-        onExpandChange={() => onInvitationToggle(id)}
-      >
-        <CardHeader
-          title={`${name} ${lastName}`}
-          actAsExpander={true}
-          showExpandableButton={true}
-        />
-        <CardText expandable={true} style={{ display: 'flex' }}>
+      <ExpansionPanel expanded={expanded} onChange={onInvitationToggle}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography component="h5">{`${name} ${lastName}`}</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <div style={{ width: '50%' }}>
             <div>
               <TextField
-                hintText="Enter name"
-                floatingLabelText="Name"
+                label="Name"
+                placeholder="Enter name"
                 value={name}
                 onChange={this.onNameChange}
               />
             </div>
             <div>
               <TextField
-                hintText="Enter last name"
-                floatingLabelText="Last name"
+                label="Last name"
+                placeholder="Enter last name"
                 value={lastName}
                 onChange={this.onLastNameChange}
               />
             </div>
             <div>
-              <Checkbox
-                checkedIcon={<ActionFavorite />}
-                uncheckedIcon={<ActionFavoriteBorder />}
-                label="Plus one"
-                style={{ marginTop: 30 }}
-                checked={plusOne}
-                onCheck={this.onPlusOneChange}
-              />
-            </div>
-          </div>
-          <div style={{ width: '50%' }}>
-            <div>
               <TextField
-                hintText="Table"
-                floatingLabelText="Enter table number"
+                label="Table"
+                placeholder="Enter table number"
                 value={table}
                 onChange={this.onTableChange}
               />
             </div>
-            <div>
-              <SelectField
-                floatingLabelText="Sex"
-                value={sex}
-                autoWidth={true}
-                onChange={this.onSexChange}
-              >
-              {GENDERS.map((primaryText, value) => (
-                <MenuItem
-                  key={value}
-                  value={value}
-                  primaryText={primaryText}
+            <FormControlLabel
+              style={{ marginTop: 30 }}
+              control={
+                <Checkbox
+                  checked={plusOne}
+                  onChange={this.onPlusOneChange}
                 />
-              ))}
-              </SelectField>
-            </div>
-            <div>
-              <RadioButtonGroup
-                valueSelected={sendBy}
-                name="Send by"
-                label="Send by"
+              }
+              label="Plus one"
+            />
+          </div>
+          <div style={{ width: '50%', display: 'flex', justifyContent: 'space-between' }}>
+            <FormControl style={{ flexGrow: 1 }}>
+              <InputLabel htmlFor="sex">Sex</InputLabel>
+              <Select
+                value={sex}
+                onChange={this.onSexChange}
+                inputProps={{
+                  name: 'sex',
+                  id: 'sex',
+                }}
+              >
+                {GENDERS.map((primaryText, value) => (
+                  <MenuItem
+                    key={value}
+                    value={value}
+                  >{primaryText}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl>
+              <FormLabel component="legend">Send by</FormLabel>
+              <RadioGroup
+                value={sendBy.toString()}
+                name="SendBy"
                 onChange={this.onSendByChange}
               >
-              {SEND_BY_RADIO_GROUP.map((id, key) => (
-                <RadioButton
-                  key={key}
-                  value={key}
-                  label={id}
-                />
-              ))}
-              </RadioButtonGroup>
-            </div>
+                {SEND_BY_RADIO_GROUP.map((id, key) => (
+                  <FormControlLabel
+                    key={key}
+                    value={key.toString()}
+                    label={id}
+                    control={<Radio color="primary" />}
+                    labelPlacement="start"
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
           </div>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
 
-        </CardText>
-      </Card>
     )
   }
 }
@@ -268,21 +277,6 @@ export default class Invitations extends Component {
 
   getInvitationProps = moize(getInvitationProps);
 
-  getAppBar() {
-    return (
-      <AppBar
-        title="Invitations"
-        iconElementLeft={<span />}
-        iconElementRight={
-          <span>
-            <FlatButton label="Save all" onClick={this.onSaveAll} />
-            <FlatButton label="Edit all" onClick={this.onEditAll} />
-          </span>
-        }
-      />
-    );
-  }
-
   onSaveAll = () => this.props.updateInvitations({
     $apply: invitations => invitations.map(invitation => ({ ...invitation, expanded: false }))
   });
@@ -296,8 +290,16 @@ export default class Invitations extends Component {
 
     return (
       <div className="Box">
-        <Paper style={style.paper} zDepth={5}>
-          {this.getAppBar()}
+        <Paper style={style.paper}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" style={style.title}>
+                Invitations
+              </Typography>
+              <Button color="inherit" onClick={this.onSaveAll}>Save all</Button>
+              <Button color="inherit" onClick={this.onEditAll}>Edit all</Button>
+            </Toolbar>
+          </AppBar>
           <div className="Invitations">
             {invitations.map(invitation => (
             <Invitation
@@ -307,7 +309,6 @@ export default class Invitations extends Component {
             />
           ))}
           </div>
-          {this.getAppBar()}
         </Paper>
       </div>
     );
