@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9af6782-5c9d-4668-a600-b5b6dae5e076" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/sidebar/Sidebar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/sidebar/calculations-cost/CalculationsCost.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/sidebar/invitations-count/InvitationsCount.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/sidebar/optimizations/Optimizations.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/sidebar/times/Times.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/optimizing-react.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/optimizing-react.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppContext.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Sidebar.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/item/Item.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/item/Item.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/list/List.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list/List.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -54,10 +39,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/App.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="204">
+              <caret line="158" column="28" selection-start-line="158" selection-start-column="28" selection-end-line="158" selection-end-column="28" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Grid/Grid.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1620">
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,6 +118,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -413,9 +412,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.deploy" />
         <item itemvalue="npm.lint" />
         <item itemvalue="npm.lint:fix" />
-        <item itemvalue="npm.deploy" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
       </list>
@@ -440,7 +439,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27628000" />
+    <option name="totallyTimeSpent" value="28119000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -455,14 +454,14 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48826292" visible="true" weight="0.24908425" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4895238" visible="true" weight="0.24908425" />
       <window_info id="Structure" order="1" show_stripe_button="false" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" sideWeight="0.5117371" side_tool="true" visible="true" weight="0.24908425" />
+      <window_info id="npm" order="2" sideWeight="0.5104762" side_tool="true" visible="true" weight="0.24908425" />
       <window_info id="Favorites" order="3" show_stripe_button="false" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" weight="0.32959184" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32959184" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5653061" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4642857" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -638,13 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/sidebar/Sidebar.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -710,10 +702,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/sidebar/Sidebar.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Grid/Grid.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1620">
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="204">
+          <caret line="158" column="28" selection-start-line="158" selection-start-column="28" selection-end-line="158" selection-end-column="28" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>

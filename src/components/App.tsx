@@ -153,10 +153,10 @@ class App extends Component<WithStyles, State> {
       }}>
         <Paper className={classes.root}>
           <Grid container spacing={2} className={classes.grid}>
-            <Grid item xs={3}>
+            <Grid item xs={5} sm={4} md={3}>
               <Sidebar />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} sm={8} md={9}>
               <List
                 invitations={invitations}
                 updateInvitations={this.updateInvitations}
