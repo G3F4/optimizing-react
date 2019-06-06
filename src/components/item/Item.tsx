@@ -1,4 +1,3 @@
-import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails';
@@ -15,12 +14,20 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import PropTypes from 'prop-types';
+import { Spec } from 'immutability-helper';
+import React, { ChangeEvent } from 'react';
+import { Invitation } from '../App';
 
 const SEND_BY_RADIO_GROUP = ['E-mail', 'Fax', 'Postman', 'Owl'];
 const GENDERS = ['Man', 'Woman', 'Gender'];
 
-const Item = props => {
+interface ItemProps {
+  invitation: Invitation;
+
+  updateInvitations(spec: Spec<Invitation[]>): void;
+}
+
+const Item = (props: ItemProps) => {
   const { updateInvitations, invitation } = props;
   const { id, expanded, guestInfo } = invitation;
   const { name, lastName, sex, plusOne, sendBy, table } = guestInfo;
@@ -33,7 +40,7 @@ const Item = props => {
       },
     });
   };
-  const onNameChange = event => {
+  const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     updateInvitations({
       [id]: {
         guestInfo: {
@@ -44,7 +51,7 @@ const Item = props => {
       },
     });
   };
-  const onLastNameChange = event => {
+  const onLastNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     updateInvitations({
       [id]: {
         guestInfo: {
@@ -55,7 +62,7 @@ const Item = props => {
       },
     });
   };
-  const onPlusOneChange = event => {
+  const onPlusOneChange = (event: ChangeEvent<HTMLInputElement>) => {
     updateInvitations({
       [id]: {
         guestInfo: {
@@ -66,7 +73,8 @@ const Item = props => {
       },
     });
   };
-  const onSexChange = event => {
+  const onSexChange = (event: ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
+    // @ts-ignore
     updateInvitations({
       [id]: {
         guestInfo: {
@@ -77,7 +85,8 @@ const Item = props => {
       },
     });
   };
-  const onTableChange = event => {
+  const onTableChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // @ts-ignore
     updateInvitations({
       [id]: {
         guestInfo: {
@@ -88,12 +97,13 @@ const Item = props => {
       },
     });
   };
-  const onSendByChange = event => {
+  const onSendByChange = (_event: ChangeEvent<{}>, value: string) => {
+    // @ts-ignore
     updateInvitations({
       [id]: {
         guestInfo: {
           sendBy: {
-            $set: event.target.value,
+            $set: value,
           },
         },
       },
@@ -102,7 +112,7 @@ const Item = props => {
 
   return (
     <ExpansionPanel expanded={expanded} onChange={onInvitationToggle}>
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography component="h5">{`${name} ${lastName}`}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
@@ -130,6 +140,7 @@ const Item = props => {
                 placeholder="Enter table number"
                 value={table}
                 onChange={onTableChange}
+                type="number"
               />
             </div>
           </Grid>
@@ -144,12 +155,12 @@ const Item = props => {
                   id: 'sex',
                 }}
               >
-                {GENDERS.map((primaryText, value) => (
-                  <MenuItem
-                    key={value}
-                    value={value}
-                  >{primaryText}</MenuItem>
-                ))}
+              {GENDERS.map((primaryText, value) => (
+                <MenuItem
+                  key={value}
+                  value={value}
+                >{primaryText}</MenuItem>
+              ))}
               </Select>
             </FormControl>
             <div>
@@ -172,29 +183,22 @@ const Item = props => {
                 name="SendBy"
                 onChange={onSendByChange}
               >
-                {SEND_BY_RADIO_GROUP.map((id, key) => (
-                  <FormControlLabel
-                    key={key}
-                    value={key.toString()}
-                    label={id}
-                    control={<Radio color="primary"/>}
-                    labelPlacement="start"
-                  />
-                ))}
+              {SEND_BY_RADIO_GROUP.map((label, key) => (
+                <FormControlLabel
+                  key={key}
+                  value={key.toString()}
+                  label={label}
+                  control={<Radio color="primary"/>}
+                  labelPlacement="start"
+                />
+              ))}
               </RadioGroup>
             </FormControl>
           </Grid>
         </Grid>
       </ExpansionPanelDetails>
     </ExpansionPanel>
-
   );
-};
-
-Item.propTypes = {
-  expanded: PropTypes.bool,
-  guestInfo: PropTypes.object,
-  onInvitationToggle: PropTypes.func,
 };
 
 export default Item;

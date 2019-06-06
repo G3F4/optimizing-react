@@ -1,26 +1,35 @@
-import React, { memo, useMemo, useContext } from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar/Toolbar';
 import Typography from '@material-ui/core/Typography/Typography';
+import { Spec } from 'immutability-helper';
+import React, { memo, useContext, useMemo } from 'react';
 import AppContext from '../../AppContext';
+import { Invitation } from '../App';
 import Item from '../item/Item';
 
-const expensiveCalculations = length => Array.from({ length }, (v, k) => k).map(expensiveCalculations);
+const expensiveCalculations = (length: number): any =>
+  Array.from({ length }, (_v, k) => k).map(expensiveCalculations);
 
 const ItemMemo = memo(Item);
 
-export default function List(props) {
+interface ListProps {
+  invitations: Invitation[];
+  updateInvitations(spec: Spec<Invitation[]>): void;
+  onSaveAll(): void;
+  onEditAll(): void;
+}
+
+export default function List(props: ListProps) {
   const { invitations, updateInvitations, onSaveAll, onEditAll } = props;
-  const { memo, pure } = useContext(AppContext);
+  // tslint:disable-next-line:no-shadowed-variable
+  const { value: { memo, pure, calculationsCost } } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : Item;
 
   useMemo(() => {
-    console.log(['calculating']);
-    expensiveCalculations(20);
-  }, [memo ? 0 : Date.now()]);
+    expensiveCalculations(calculationsCost);
+  }, [memo ? calculationsCost : Date.now()]);
 
   return (
     <Paper>
@@ -29,6 +38,7 @@ export default function List(props) {
           <Typography variant="h6">
             Invitations
           </Typography>
+          <div style={{ flexGrow: 1 }} />
           <Button color="inherit" onClick={onSaveAll}>Save all</Button>
           <Button color="inherit" onClick={onEditAll}>Edit all</Button>
         </Toolbar>
@@ -45,10 +55,3 @@ export default function List(props) {
     </Paper>
   );
 }
-
-List.propTypes = {
-  invitations: PropTypes.array,
-  updateInvitations: PropTypes.func,
-  onSaveAll: PropTypes.func,
-  onEditAll: PropTypes.func,
-};
