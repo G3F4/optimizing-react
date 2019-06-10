@@ -26,7 +26,7 @@ function List(props: ListProps) {
   const ItemComponent = pure ? ItemMemo : ItemContainer;
   useMemo(() => {
     expensiveCalculations(calculationsCost);
-  }, [memo ? calculationsCost : Date.now()]);
+  }, [memo ? 0 : Date.now()]);
 
   console.log(['List.render'])
 

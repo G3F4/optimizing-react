@@ -75,7 +75,7 @@ const ListConnect = () => {
   const updateInvitations = useCallback((spec: Spec<Invitation[]>) => {
     timer = Date.now();
     setInvitations(value => update(value, spec));
-  }, [invitationsCount]);
+  }, []);
 
   console.log(['ListConnect.render'])
 
