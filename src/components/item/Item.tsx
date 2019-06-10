@@ -1,3 +1,4 @@
+import React, { ChangeEvent } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails';
@@ -14,8 +15,6 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Spec } from 'immutability-helper';
-import React, { ChangeEvent } from 'react';
 import { Invitation } from '../App';
 
 const SEND_BY_RADIO_GROUP = ['E-mail', 'Fax', 'Postman', 'Owl'];
@@ -24,91 +23,30 @@ const GENDERS = ['Man', 'Woman', 'Gender'];
 interface ItemProps {
   invitation: Invitation;
 
-  updateInvitations(spec: Spec<Invitation[]>): void;
+  onInvitationToggle(): void;
+  onNameChange(event: ChangeEvent<HTMLInputElement>): void;
+  onLastNameChange(event: ChangeEvent<HTMLInputElement>): void;
+  onPlusOneChange(event: ChangeEvent<HTMLInputElement>): void;
+  onSexChange(event: ChangeEvent<{ name?: string | undefined; value: unknown; }>): void;
+  onTableChange(event: ChangeEvent<HTMLInputElement>): void;
+  onSendByChange(_event: ChangeEvent<{}>, value: string): void;
 }
 
 const Item = (props: ItemProps) => {
-  const { updateInvitations, invitation } = props;
-  const { id, expanded, guestInfo } = invitation;
+  const {
+    invitation,
+    onInvitationToggle,
+    onNameChange,
+    onLastNameChange,
+    onPlusOneChange,
+    onSexChange,
+    onTableChange,
+    onSendByChange,
+  } = props;
+  const { expanded, guestInfo } = invitation;
   const { name, lastName, sex, plusOne, sendBy, table } = guestInfo;
-  const onInvitationToggle = () => {
-    updateInvitations({
-      [id]: {
-        expanded: {
-          $set: !expanded,
-        },
-      },
-    });
-  };
-  const onNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          name: {
-            $set: event.target.value,
-          },
-        },
-      },
-    });
-  };
-  const onLastNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          lastName: {
-            $set: event.target.value,
-          },
-        },
-      },
-    });
-  };
-  const onPlusOneChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          plusOne: {
-            $set: event.target.checked,
-          },
-        },
-      },
-    });
-  };
-  const onSexChange = (event: ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
-    // @ts-ignore
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          sex: {
-            $set: event.target.value,
-          },
-        },
-      },
-    });
-  };
-  const onTableChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // @ts-ignore
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          table: {
-            $set: event.target.value,
-          },
-        },
-      },
-    });
-  };
-  const onSendByChange = (_event: ChangeEvent<{}>, value: string) => {
-    // @ts-ignore
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          sendBy: {
-            $set: value,
-          },
-        },
-      },
-    });
-  };
+
+  console.log(['Item.render'])
 
   return (
     <ExpansionPanel expanded={expanded} onChange={onInvitationToggle}>

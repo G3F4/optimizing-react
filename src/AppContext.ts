@@ -8,7 +8,6 @@ export interface AppContextValue {
   memo: boolean;
   invitationsCount: number;
   calculationsCost: number;
-  times: number[];
 }
 
 export interface AppContextProps {
@@ -25,10 +24,11 @@ const AppContext = createContext<AppContextProps>({
     memo: false,
     invitationsCount: DEFAULT_INVITATION_COUNT,
     calculationsCost: DEFAULT_CALCULATIONS_COST,
-    times: [],
   },
-  onCalculationsCostChange: Function,
-  onInvitationsCountChange: Function,
+  // tslint:disable-next-line:no-empty
+  onCalculationsCostChange(_cost: string) {},
+  // tslint:disable-next-line:no-empty
+  onInvitationsCountChange(_length: string) {},
   togglePure: Function,
   toggleMemo: Function,
 });

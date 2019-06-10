@@ -6,7 +6,7 @@ const CalculationsCost = () => {
   const { value: { calculationsCost }, onCalculationsCostChange } = useContext(AppContext);
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     onCalculationsCostChange(event.target.value);
-  }, []);
+  }, [onCalculationsCostChange]);
 
   return (
     <div>
