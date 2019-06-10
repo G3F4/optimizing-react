@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useCallback } from 'react';
 import { Spec } from 'immutability-helper';
 import { Invitation } from '../App';
+import { GuestInfo } from '../list/ListConnect';
 import Item from './Item';
 
 interface ItemContainerProps {
@@ -12,6 +13,12 @@ interface ItemContainerProps {
 const ItemContainer = (props: ItemContainerProps) => {
   const { updateInvitations, invitation } = props;
   const { id, expanded } = invitation;
+  const updateGuestInfo = useCallback((guestInfo: Spec<GuestInfo>) => {
+    // @ts-ignore
+    updateInvitations({
+      [id]: { guestInfo },
+    });
+  }, [id, updateInvitations]);
   const handleInvitationToggle = useCallback(() => {
     updateInvitations({
       [id]: {
@@ -22,74 +29,50 @@ const ItemContainer = (props: ItemContainerProps) => {
     });
   }, [expanded, id, updateInvitations]);
   const handleNameChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          name: {
-            $set: event.target.value,
-          },
-        },
+    updateGuestInfo({
+      name: {
+        $set: event.target.value,
       },
     });
-  }, [id, updateInvitations]);
+  }, [updateGuestInfo]);
   const handleLastNameChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          lastName: {
-            $set: event.target.value,
-          },
-        },
+    updateGuestInfo({
+      lastName: {
+        $set: event.target.value,
       },
     });
-  }, [id, updateInvitations]);
+  }, [updateGuestInfo]);
   const handlePlusOneChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          plusOne: {
-            $set: event.target.checked,
-          },
-        },
+    updateGuestInfo({
+      plusOne: {
+        $set: event.target.checked,
       },
     });
-  }, [id, updateInvitations]);
+  }, [updateGuestInfo]);
   const handleSexChange = useCallback((event: ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
     // @ts-ignore
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          sex: {
-            $set: event.target.value,
-          },
-        },
+    updateGuestInfo({
+      sex: {
+        $set: event.target.value,
       },
     });
-  }, [id, updateInvitations]);
+  }, [updateGuestInfo]);
   const handleTableChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     // @ts-ignore
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          table: {
-            $set: event.target.value,
-          },
-        },
+    updateGuestInfo({
+      table: {
+        $set: event.target.value,
       },
     });
-  }, [id, updateInvitations]);
+  }, [updateGuestInfo]);
   const handleSendByChange = useCallback((_event: ChangeEvent<{}>, value: string) => {
     // @ts-ignore
-    updateInvitations({
-      [id]: {
-        guestInfo: {
-          sendBy: {
-            $set: value,
-          },
-        },
+    updateGuestInfo({
+      sendBy: {
+        $set: value,
       },
     });
-  }, [id, updateInvitations]);
+  }, [updateGuestInfo]);
 
   console.log(['ItemContainer.render'])
 
