@@ -1,10 +1,9 @@
 import Paper from '@material-ui/core/Paper';
-import { Spec } from 'immutability-helper';
 import React, { memo, useContext, useMemo } from 'react';
 import AppContext from '../../AppContext';
 import ItemContainer from '../item/ItemContainer';
 import ListHeader from './header/ListHeader';
-import { Invitation } from './ListConnect';
+import { GuestInfo, Invitation } from './ListConnect';
 
 const ItemMemo = memo(ItemContainer);
 
@@ -14,11 +13,11 @@ const expensiveCalculations = (length: number): any =>
 export interface ListProps {
   invitations: Invitation[];
 
-  updateInvitations(spec: Spec<Invitation[]>): void;
+  updateInvitation(id: string, guestInfo: GuestInfo): void;
 }
 
 function List(props: ListProps) {
-  const { invitations, updateInvitations } = props;
+  const { invitations, updateInvitation } = props;
   // tslint:disable-next-line:no-shadowed-variable
   const { value: { memo, pure, calculationsCost } } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : ItemContainer;
@@ -34,7 +33,7 @@ function List(props: ListProps) {
         <ItemComponent
           key={invitation.id}
           invitation={invitation}
-          updateInvitations={updateInvitations}
+          updateInvitation={updateInvitation}
         />
         ))}
       </div>

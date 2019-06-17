@@ -1,5 +1,5 @@
 import { name, random } from 'faker';
-import update, { Spec } from 'immutability-helper';
+import produce from 'immer';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import AppContext from '../../AppContext';
 import List from './List';
@@ -60,15 +60,17 @@ const ListConnect = () => {
     setInvitations(Array.from({ length: invitationsCount }, generateInvitation));
   }, [invitationsCount]);
 
-  const updateInvitations = useCallback((spec: Spec<Invitation[]>) => {
+  const updateInvitation = useCallback((id: string, guestInfo: GuestInfo) => {
     timer = Date.now();
-    setInvitations(value => update(value, spec));
+    setInvitations(value => produce(value, draftValue => {
+      draftValue[draftValue.findIndex(item => item.id === id)].guestInfo = guestInfo;
+    }));
   }, []);
 
   return (
     <List
       invitations={invitations}
-      updateInvitations={updateInvitations}
+      updateInvitation={updateInvitation}
     />
   );
 };
