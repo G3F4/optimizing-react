@@ -1357,7 +1357,7 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/react-dom@^16.8.4":
+"@types/react-dom@16.8.4":
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.4.tgz#7fb7ba368857c7aa0f4e4511c4710ca2c5a12a88"
   integrity sha512-eIRpEW73DCzPIMaNBDP5pPIpK1KXyZwNgfxiVagb5iGiz6da+9A5hslSX6GAQKdO7SayVCS/Fr2kjqprgAvkfA==
@@ -9536,6 +9536,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tiny-params@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/tiny-params/-/tiny-params-4.0.0.tgz#ad1ed20dd66fdfa72dc7df72b54693bb13b7edd0"
+  integrity sha512-U3RmvniKortP70vMXvkY/7tKTucICOVP9FvCARAlyzNnpf+PgBly4YWugsudkVkpSD18y4PUyYn74k1085J5Tg==
 
 tiny-warning@^1.0.2:
   version "1.0.2"

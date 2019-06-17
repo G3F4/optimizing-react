@@ -1,5 +1,5 @@
 import TextField from '@material-ui/core/TextField';
-import React, { ChangeEvent, memo } from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface TextControlProps {
   label: string;
@@ -22,4 +22,4 @@ const TextControl: React.FC<TextControlProps> = ({ label, value, placeholder, ty
   </div>
 );
 
-export default memo(TextControl);
+export default TextControl;

@@ -3,7 +3,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { ChangeEvent, memo } from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface RadioGroupControlProps {
   value: string;
@@ -35,4 +35,4 @@ const RadioGroupControl: React.FC<RadioGroupControlProps> = ({ value, options, l
   </FormControl>
 );
 
-export default memo(RadioGroupControl);
+export default RadioGroupControl;

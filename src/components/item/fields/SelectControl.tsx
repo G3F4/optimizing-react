@@ -2,7 +2,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import React, { ChangeEvent, memo } from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface SelectControlProps {
   value: number;
@@ -35,4 +35,4 @@ const SelectControl: React.FC<SelectControlProps> = ({ label, value, name, optio
   </FormControl>
 );
 
-export default memo(SelectControl);
+export default SelectControl;

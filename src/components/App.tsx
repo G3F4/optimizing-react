@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper/Paper';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import React, { Component } from 'react';
+import tinyParams from 'tiny-params';
 import AppContext, { AppContextValue, DEFAULT_CALCULATIONS_COST, DEFAULT_INVITATION_COUNT } from '../AppContext';
 import ListConnect from './list/ListConnect';
 import Sidebar from './sidebar/Sidebar';
@@ -31,8 +32,8 @@ interface State {
 class App extends Component<WithStyles, State> {
   public state: State = {
     context: {
-      memo: false,
-      pure: false,
+      memo: tinyParams(window.location.href).memo || false,
+      pure: tinyParams(window.location.href).pure || false,
       calculationsCost: DEFAULT_CALCULATIONS_COST,
       invitationsCount: DEFAULT_INVITATION_COUNT,
     },

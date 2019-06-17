@@ -1,6 +1,6 @@
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import React, { ChangeEvent, memo } from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface CheckboxControlControlProps {
   checked: boolean;
@@ -23,4 +23,4 @@ const CheckboxControl: React.FC<CheckboxControlControlProps> = ({ checked, label
   </div>
 );
 
-export default memo(CheckboxControl);
+export default CheckboxControl;
