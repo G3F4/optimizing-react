@@ -9,7 +9,7 @@ import Times from './times/Times';
 const styles = (theme: Theme) => ({
   root: {
     height: '100%',
-    margin: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
     maxHeight: '100vh',
     overflow: 'hidden',
   },

@@ -12,7 +12,6 @@ export interface ListProps {
 function ListHeader(props: ListProps) {
   const { onSaveAll, onEditAll } = props;
   // tslint:disable-next-line:no-shadowed-variable
-  console.log(['List.render'])
 
   return (
     <AppBar position="static">

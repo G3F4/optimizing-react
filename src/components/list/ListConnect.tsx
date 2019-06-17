@@ -43,7 +43,7 @@ const generateInvitation = (_: any, id: number): Invitation => ({
     lastName: name.lastName(random.number({ min: 0, max: 1 })),
     table: random.number({ min: 1, max: 10 }),
     plusOne: random.boolean(),
-    sex: random.number({ min: 1, max: 3 }),
+    sex: random.number({ min: 0, max: 2 }),
     sendBy: random.number({ min: 1, max: 4 }),
   },
 });
@@ -76,8 +76,6 @@ const ListConnect = () => {
     timer = Date.now();
     setInvitations(value => update(value, spec));
   }, []);
-
-  console.log(['ListConnect.render'])
 
   return (
     <List

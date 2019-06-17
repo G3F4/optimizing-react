@@ -5,6 +5,8 @@ import AppContext from '../../AppContext';
 import { Invitation } from '../App';
 import ItemContainer from '../item/ItemContainer';
 import ListHeader from './header/ListHeader';
+import { VariableSizeList } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 const ItemMemo = memo(ItemContainer);
 
@@ -28,17 +30,45 @@ function List(props: ListProps) {
     expensiveCalculations(calculationsCost);
   }, [memo ? 0 : Date.now()]);
 
+  console.log(['List.render'])
+  const getItemSize = (index: number) => invitations[index].expanded ? 400 : 48;
+
   return (
     <Paper>
       <ListHeader onEditAll={onEditAll} onSaveAll={onSaveAll} />
+      <AutoSizer>
+        {({ width, height }) => {
+          console.log(['{ width, height }'], { width, height });
+
+          return (
+            <VariableSizeList
+              height={300}
+              itemCount={invitations.length}
+              itemSize={getItemSize}
+              width={width}
+            >
+              {({ index, style }) => (
+                <div style={style}>
+                  <ItemComponent
+                    key={invitations[index].id}
+                    invitation={invitations[index]}
+                    updateInvitations={updateInvitations}
+                  />
+                </div>
+              )}
+            </VariableSizeList>
+          );
+        }}
+      </AutoSizer>
       <div>
-      {invitations.map(invitation => (
-        <ItemComponent
-          key={invitation.id}
-          invitation={invitation}
-          updateInvitations={updateInvitations}
-        />
-        ))}
+
+      {/*{invitations.map(invitation => (*/}
+      {/*  <ItemComponent*/}
+      {/*    key={invitation.id}*/}
+      {/*    invitation={invitation}*/}
+      {/*    updateInvitations={updateInvitations}*/}
+      {/*  />*/}
+      {/*  ))}*/}
       </div>
     </Paper>
   );

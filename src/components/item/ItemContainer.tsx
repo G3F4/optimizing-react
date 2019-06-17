@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useCallback } from 'react';
 import { Spec } from 'immutability-helper';
+import React, { ChangeEvent, useCallback } from 'react';
 import { Invitation } from '../App';
 import { GuestInfo } from '../list/ListConnect';
 import Item from './Item';
@@ -73,8 +73,6 @@ const ItemContainer = (props: ItemContainerProps) => {
       },
     });
   }, [updateGuestInfo]);
-
-  console.log(['ItemContainer.render'])
 
   return (
     <Item
