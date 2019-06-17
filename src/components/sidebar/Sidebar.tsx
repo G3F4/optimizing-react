@@ -11,7 +11,7 @@ const styles = (theme: Theme) => ({
     height: '100%',
     paddingLeft: theme.spacing(2),
     maxHeight: '100vh',
-    overflow: 'hidden',
+    overflow: 'scroll',
   },
 });
 

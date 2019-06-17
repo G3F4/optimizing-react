@@ -48,17 +48,17 @@ const Item = (props: ItemProps) => {
     <Paper className={classes.wrapper}>
       <Typography component="h5">{`${name} ${lastName}`}</Typography>
       <Grid container>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <TextControl value={name} label="Name" placeholder="Enter name" onChange={onNameChange} />
           <TextControl value={lastName} label="Last name" placeholder="Enter last name" onChange={onLastNameChange} />
           {/* tslint:disable-next-line:max-line-length */}
           <TextControl value={table} label="Table" placeholder="Enter table number" type="number" onChange={onTableChange} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <SelectControl value={sex} label="Sex" name="sex" options={GENDERS} onChange={onSexChange} />
           <CheckboxControl checked={plusOne} label="Plus one" onChange={onPlusOneChange} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           {/* tslint:disable-next-line:max-line-length */}
           <RadioGroupControl value={sendBy.toString()} name="sendBy" label="Send by" options={SEND_BY_RADIO_GROUP} onChange={onSendByChange} />
         </Grid>
