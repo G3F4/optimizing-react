@@ -1,6 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import update, { Spec } from 'immutability-helper';
 import { name, random } from 'faker';
+import update, { Spec } from 'immutability-helper';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import AppContext from '../../AppContext';
 import List from './List';
 
@@ -22,7 +22,6 @@ const addRenderTime = (time: number): void => {
 
 export interface Invitation {
   id: string;
-  expanded: boolean;
   guestInfo: GuestInfo;
 }
 
@@ -37,7 +36,6 @@ export interface GuestInfo {
 
 const generateInvitation = (_: any, id: number): Invitation => ({
   id: id.toString(),
-  expanded: false,
   guestInfo: {
     name: name.firstName(random.number({ min: 0, max: 1 })),
     lastName: name.lastName(random.number({ min: 0, max: 1 })),
@@ -62,16 +60,6 @@ const ListConnect = () => {
     setInvitations(Array.from({ length: invitationsCount }, generateInvitation));
   }, [invitationsCount]);
 
-  const handleSaveAll = useCallback((): void => {
-    setInvitations(update(invitations, {
-      $apply: (it: Invitation[]) => it.map(invitation => ({ ...invitation, expanded: false })),
-    }));
-  }, [invitations]);
-  const handleEditAll = useCallback((): void => {
-    setInvitations(update(invitations, {
-      $apply: (it: Invitation[]) => it.map(invitation => ({ ...invitation, expanded: true })),
-    }));
-  }, [invitations]);
   const updateInvitations = useCallback((spec: Spec<Invitation[]>) => {
     timer = Date.now();
     setInvitations(value => update(value, spec));
@@ -81,8 +69,6 @@ const ListConnect = () => {
     <List
       invitations={invitations}
       updateInvitations={updateInvitations}
-      onSaveAll={handleSaveAll}
-      onEditAll={handleEditAll}
     />
   );
 };

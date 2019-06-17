@@ -2,9 +2,9 @@ import Paper from '@material-ui/core/Paper';
 import { Spec } from 'immutability-helper';
 import React, { memo, useContext, useMemo } from 'react';
 import AppContext from '../../AppContext';
-import { Invitation } from '../App';
 import ItemContainer from '../item/ItemContainer';
 import ListHeader from './header/ListHeader';
+import { Invitation } from './ListConnect';
 
 const ItemMemo = memo(ItemContainer);
 
@@ -15,12 +15,10 @@ export interface ListProps {
   invitations: Invitation[];
 
   updateInvitations(spec: Spec<Invitation[]>): void;
-  onSaveAll(): void;
-  onEditAll(): void;
 }
 
 function List(props: ListProps) {
-  const { invitations, updateInvitations, onSaveAll, onEditAll } = props;
+  const { invitations, updateInvitations } = props;
   // tslint:disable-next-line:no-shadowed-variable
   const { value: { memo, pure, calculationsCost } } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : ItemContainer;
@@ -30,7 +28,7 @@ function List(props: ListProps) {
 
   return (
     <Paper>
-      <ListHeader onEditAll={onEditAll} onSaveAll={onSaveAll} />
+      <ListHeader />
       <div>
       {invitations.map(invitation => (
         <ItemComponent

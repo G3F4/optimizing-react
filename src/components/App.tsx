@@ -7,21 +7,6 @@ import AppContext, { AppContextValue, DEFAULT_CALCULATIONS_COST, DEFAULT_INVITAT
 import ListConnect from './list/ListConnect';
 import Sidebar from './sidebar/Sidebar';
 
-export interface Invitation {
-  id: string;
-  expanded: boolean;
-  guestInfo: GuestInfo;
-}
-
-export interface GuestInfo {
-  name: string;
-  lastName: string;
-  table: number;
-  plusOne: boolean;
-  sex: number;
-  sendBy: number;
-}
-
 const styles = (theme: Theme) => ({
   root: {
     minHeight: '100vh',

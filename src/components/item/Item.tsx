@@ -3,7 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import React, { ChangeEvent } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography/Typography';
-import { Invitation } from '../App';
+import { Invitation } from '../list/ListConnect';
 import CheckboxControl from './fields/CheckboxControl';
 import RadioGroupControl from './fields/RadioGroupControl';
 import SelectControl from './fields/SelectControl';
@@ -22,7 +22,6 @@ const styles = (theme: Theme) => ({
 interface ItemProps extends WithStyles {
   invitation: Invitation;
 
-  onInvitationToggle(): void;
   onNameChange(event: ChangeEvent<HTMLInputElement>): void;
   onLastNameChange(event: ChangeEvent<HTMLInputElement>): void;
   onPlusOneChange(event: ChangeEvent<HTMLInputElement>): void;

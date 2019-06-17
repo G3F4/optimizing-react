@@ -31,7 +31,6 @@ function List(props: ListProps) {
   }, [memo ? 0 : Date.now()]);
 
   console.log(['List.render'])
-  const getItemSize = (index: number) => invitations[index].expanded ? 400 : 48;
 
   return (
     <Paper>
@@ -44,7 +43,7 @@ function List(props: ListProps) {
             <VariableSizeList
               height={300}
               itemCount={invitations.length}
-              itemSize={getItemSize}
+              itemSize={400}
               width={width}
             >
               {({ index, style }) => (

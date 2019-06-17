@@ -1,7 +1,6 @@
 import { Spec } from 'immutability-helper';
 import React, { ChangeEvent, useCallback } from 'react';
-import { Invitation } from '../App';
-import { GuestInfo } from '../list/ListConnect';
+import { GuestInfo, Invitation } from '../list/ListConnect';
 import Item from './Item';
 
 interface ItemContainerProps {
@@ -12,22 +11,13 @@ interface ItemContainerProps {
 
 const ItemContainer = (props: ItemContainerProps) => {
   const { updateInvitations, invitation } = props;
-  const { id, expanded } = invitation;
+  const { id } = invitation;
   const updateGuestInfo = useCallback((guestInfo: Spec<GuestInfo>) => {
     // @ts-ignore
     updateInvitations({
       [id]: { guestInfo },
     });
   }, [id, updateInvitations]);
-  const handleInvitationToggle = useCallback(() => {
-    updateInvitations({
-      [id]: {
-        expanded: {
-          $set: !expanded,
-        },
-      },
-    });
-  }, [expanded, id, updateInvitations]);
   const handleNameChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     updateGuestInfo({
       name: {
@@ -77,7 +67,6 @@ const ItemContainer = (props: ItemContainerProps) => {
   return (
     <Item
       invitation={invitation}
-      onInvitationToggle={handleInvitationToggle}
       onLastNameChange={handleLastNameChange}
       onNameChange={handleNameChange}
       onPlusOneChange={handlePlusOneChange}
