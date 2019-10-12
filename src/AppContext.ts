@@ -25,8 +25,14 @@ const AppContext = createContext<AppContextProps>({
     invitationsCount: DEFAULT_INVITATION_COUNT,
     calculationsCost: DEFAULT_CALCULATIONS_COST,
   },
-  onCalculationsCostChange(_cost: string) {},
-  onInvitationsCountChange(_length: string) {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onCalculationsCostChange(_cost: string) {
+    return;
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onInvitationsCountChange(_length: string) {
+    return;
+  },
   togglePure: Function,
   toggleMemo: Function,
 });

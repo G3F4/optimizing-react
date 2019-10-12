@@ -6,10 +6,8 @@ import React, { memo } from 'react';
 const ListHeader: React.FC = () => (
   <AppBar position="static">
     <Toolbar>
-      <Typography variant="h6">
-        Invitations
-      </Typography>
-      <div style={{ flexGrow: 1 }}/>
+      <Typography variant="h6">Invitations</Typography>
+      <div style={{ flexGrow: 1 }} />
     </Toolbar>
   </AppBar>
 );

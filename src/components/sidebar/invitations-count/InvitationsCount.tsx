@@ -27,7 +27,10 @@ const styles = (theme: Theme) => ({
 });
 
 const InvitationsCount = ({ classes }: WithStyles) => {
-  const { value: { invitationsCount }, onInvitationsCountChange } = useContext(AppContext);
+  const {
+    value: { invitationsCount },
+    onInvitationsCountChange,
+  } = useContext(AppContext);
 
   return (
     <div>
@@ -39,20 +42,24 @@ const InvitationsCount = ({ classes }: WithStyles) => {
           name="invitationCount"
           value={invitationsCount.toString()}
         >
-        {COUNT_GROUP.map((count, key) => (
-          <FormControlLabel
-            key={key}
-            value={count.toString()}
-            label={count}
-            className={classes.radioButton}
-            control={<Radio color="primary" />}
-          />
-        ))}
+          {COUNT_GROUP.map((count, key) => (
+            <FormControlLabel
+              key={key}
+              value={count.toString()}
+              label={count}
+              className={classes.radioButton}
+              control={<Radio color="primary" />}
+            />
+          ))}
         </RadioGroup>
         <Button
-          onClick={() => onInvitationsCountChange((invitationsCount * 2).toString())}
+          onClick={() =>
+            onInvitationsCountChange((invitationsCount * 2).toString())
+          }
           fullWidth
-        >Double count</Button>
+        >
+          Double count
+        </Button>
       </FormControl>
     </div>
   );

@@ -25,7 +25,9 @@ interface ItemProps extends WithStyles {
   onNameChange(event: ChangeEvent<HTMLInputElement>): void;
   onLastNameChange(event: ChangeEvent<HTMLInputElement>): void;
   onPlusOneChange(event: ChangeEvent<HTMLInputElement>): void;
-  onSexChange(event: ChangeEvent<{ name?: string | undefined; value: unknown; }>): void;
+  onSexChange(
+    event: ChangeEvent<{ name?: string | undefined; value: unknown }>,
+  ): void;
   onTableChange(event: ChangeEvent<HTMLInputElement>): void;
   onSendByChange(_event: ChangeEvent<{}>, value: string): void;
 }
@@ -49,16 +51,48 @@ const Item = (props: ItemProps) => {
       <Typography component="h5">{`${name} ${lastName}`}</Typography>
       <Grid container>
         <Grid item xs={12} sm={6} md={4}>
-          <TextControl value={name} label="Name" placeholder="Enter name" onChange={onNameChange} />
-          <TextControl value={lastName} label="Last name" placeholder="Enter last name" onChange={onLastNameChange} />
-          <TextControl value={table} label="Table" placeholder="Enter table number" type="number" onChange={onTableChange} />
+          <TextControl
+            value={name}
+            label="Name"
+            placeholder="Enter name"
+            onChange={onNameChange}
+          />
+          <TextControl
+            value={lastName}
+            label="Last name"
+            placeholder="Enter last name"
+            onChange={onLastNameChange}
+          />
+          <TextControl
+            value={table}
+            label="Table"
+            placeholder="Enter table number"
+            type="number"
+            onChange={onTableChange}
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <SelectControl value={sex} label="Sex" name="sex" options={GENDERS} onChange={onSexChange} />
-          <CheckboxControl checked={plusOne} label="Plus one" onChange={onPlusOneChange} />
+          <SelectControl
+            value={sex}
+            label="Sex"
+            name="sex"
+            options={GENDERS}
+            onChange={onSexChange}
+          />
+          <CheckboxControl
+            checked={plusOne}
+            label="Plus one"
+            onChange={onPlusOneChange}
+          />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <RadioGroupControl value={sendBy.toString()} name="sendBy" label="Send by" options={SEND_BY_RADIO_GROUP} onChange={onSendByChange} />
+          <RadioGroupControl
+            value={sendBy.toString()}
+            name="sendBy"
+            label="Send by"
+            options={SEND_BY_RADIO_GROUP}
+            onChange={onSendByChange}
+          />
         </Grid>
       </Grid>
     </Paper>

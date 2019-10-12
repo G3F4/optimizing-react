@@ -4,18 +4,20 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import AppContext from '../../AppContext';
 import List from './List';
 
+const getNode = (selector: string) => document.querySelector(selector);
+
 const addRenderTime = (time: number): void => {
-  // @ts-ignore
-  const timesNode = window.document.querySelector('#times');
-  // @ts-ignore
-  const clone = window.document.querySelector('#time').cloneNode( true );
-  clone.textContent = `${time} ms`;
-  // @ts-ignore
-  timesNode.prepend(clone);
-  Array.from(timesNode!.children).forEach((child, index) => {
-    // @ts-ignore
-    child.style.fontSize = `${48 - index * 4}px`;
-  });
+  const timesNode = getNode('#times');
+  const timeNode = getNode('#time');
+  const timeNodeClone = timeNode && timeNode.cloneNode(true);
+
+  if (timesNode && timeNodeClone) {
+    timeNodeClone.textContent = `${time} ms`;
+    timesNode.prepend(timeNodeClone);
+    Array.from(timesNode.children).forEach((child: any, index) => {
+      child.style.fontSize = `${48 - index * 4}px`;
+    });
+  }
 };
 
 export interface Invitation {
@@ -47,30 +49,35 @@ const generateInvitation = (_: any, id: number): Invitation => ({
 let timer = Date.now();
 
 const ListConnect = () => {
-  const { value: { invitationsCount } } = useContext(AppContext);
-  const [invitations, setInvitations] = useState(Array.from({ length: invitationsCount }, generateInvitation));
+  const {
+    value: { invitationsCount },
+  } = useContext(AppContext);
+  const [invitations, setInvitations] = useState(
+    Array.from({ length: invitationsCount }, generateInvitation),
+  );
 
   useEffect(() => {
     addRenderTime(Date.now() - timer);
   }, [invitations]);
 
   useEffect(() => {
-    setInvitations(Array.from({ length: invitationsCount }, generateInvitation));
+    setInvitations(
+      Array.from({ length: invitationsCount }, generateInvitation),
+    );
   }, [invitationsCount]);
 
   const updateInvitation = useCallback((id: string, guestInfo: GuestInfo) => {
     timer = Date.now();
-    setInvitations(value => produce(value, draftValue => {
-      draftValue[draftValue.findIndex(item => item.id === id)].guestInfo = guestInfo;
-    }));
+    setInvitations(value =>
+      produce(value, draftValue => {
+        draftValue[
+          draftValue.findIndex(item => item.id === id)
+        ].guestInfo = guestInfo;
+      }),
+    );
   }, []);
 
-  return (
-    <List
-      invitations={invitations}
-      updateInvitation={updateInvitation}
-    />
-  );
+  return <List invitations={invitations} updateInvitation={updateInvitation} />;
 };
 
 export default ListConnect;

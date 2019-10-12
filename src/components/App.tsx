@@ -4,7 +4,11 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import React, { Component } from 'react';
 import tinyParams from 'tiny-params';
-import AppContext, { AppContextValue, DEFAULT_CALCULATIONS_COST, DEFAULT_INVITATION_COUNT } from '../AppContext';
+import AppContext, {
+  AppContextValue,
+  DEFAULT_CALCULATIONS_COST,
+  DEFAULT_INVITATION_COUNT,
+} from '../AppContext';
 import ListConnect from './list/ListConnect';
 import Sidebar from './sidebar/Sidebar';
 
@@ -39,19 +43,21 @@ class App extends Component<WithStyles, State> {
     },
   };
 
-  public toggleMemo = (): void => this.setState({
-    context: {
-      ...this.state.context,
-      memo: !this.state.context.memo,
-    },
-  })
+  public toggleMemo = (): void =>
+    this.setState({
+      context: {
+        ...this.state.context,
+        memo: !this.state.context.memo,
+      },
+    });
 
-  public togglePure = (): void => this.setState({
-    context: {
-      ...this.state.context,
-      pure: !this.state.context.pure,
-    },
-  })
+  public togglePure = (): void =>
+    this.setState({
+      context: {
+        ...this.state.context,
+        pure: !this.state.context.pure,
+      },
+    });
 
   public handleInvitationsCountChange = (length: string): void => {
     this.setState({
@@ -60,7 +66,7 @@ class App extends Component<WithStyles, State> {
         invitationsCount: parseInt(length, 10),
       },
     });
-  }
+  };
 
   public handleCalculationsCostChange = (cost: string): void => {
     this.setState({
@@ -69,20 +75,22 @@ class App extends Component<WithStyles, State> {
         calculationsCost: parseInt(cost, 10),
       },
     });
-  }
+  };
 
   public render() {
     const { classes } = this.props;
     const { context } = this.state;
 
     return (
-      <AppContext.Provider value={{
-        value: context,
-        toggleMemo: this.toggleMemo,
-        togglePure: this.togglePure,
-        onInvitationsCountChange: this.handleInvitationsCountChange,
-        onCalculationsCostChange: this.handleCalculationsCostChange,
-      }}>
+      <AppContext.Provider
+        value={{
+          value: context,
+          toggleMemo: this.toggleMemo,
+          togglePure: this.togglePure,
+          onInvitationsCountChange: this.handleInvitationsCountChange,
+          onCalculationsCostChange: this.handleCalculationsCostChange,
+        }}
+      >
         <Paper className={classes.root}>
           <Grid container spacing={2} className={classes.grid}>
             <Grid item xs={5} sm={4} md={3} lg={2}>

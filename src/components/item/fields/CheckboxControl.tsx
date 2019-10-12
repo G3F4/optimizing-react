@@ -9,15 +9,14 @@ export interface CheckboxControlControlProps {
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-const CheckboxControl: React.FC<CheckboxControlControlProps> = ({ checked, label, onChange }) => (
+const CheckboxControl: React.FC<CheckboxControlControlProps> = ({
+  checked,
+  label,
+  onChange,
+}) => (
   <div>
     <FormControlLabel
-      control={
-        <Checkbox
-          checked={checked}
-          onChange={onChange}
-        />
-      }
+      control={<Checkbox checked={checked} onChange={onChange} />}
       label={label}
     />
   </div>

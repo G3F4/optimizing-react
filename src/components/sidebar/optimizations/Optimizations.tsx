@@ -12,7 +12,11 @@ const styles = (theme: Theme) => ({
 });
 
 const Optimizations = ({ classes }: WithStyles) => {
-  const { value: { memo, pure }, toggleMemo, togglePure } = useContext(AppContext);
+  const {
+    value: { memo, pure },
+    toggleMemo,
+    togglePure,
+  } = useContext(AppContext);
 
   return (
     <div>

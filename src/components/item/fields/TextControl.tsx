@@ -10,7 +10,13 @@ export interface TextControlProps {
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-const TextControl: React.FC<TextControlProps> = ({ label, value, placeholder, type, onChange }) => (
+const TextControl: React.FC<TextControlProps> = ({
+  label,
+  value,
+  placeholder,
+  type,
+  onChange,
+}) => (
   <div>
     <TextField
       label={label}

@@ -10,10 +10,18 @@ export interface SelectControlProps {
   name: string;
   options: string[];
 
-  onChange(event: ChangeEvent<{ name?: string | undefined; value: unknown; }>): void;
+  onChange(
+    event: ChangeEvent<{ name?: string | undefined; value: unknown }>,
+  ): void;
 }
 
-const SelectControl: React.FC<SelectControlProps> = ({ label, value, name, options, onChange }) => (
+const SelectControl: React.FC<SelectControlProps> = ({
+  label,
+  value,
+  name,
+  options,
+  onChange,
+}) => (
   <FormControl>
     <InputLabel htmlFor={name}>{label}</InputLabel>
     <Select
@@ -25,10 +33,9 @@ const SelectControl: React.FC<SelectControlProps> = ({ label, value, name, optio
       }}
     >
       {options.map((text, value) => (
-        <MenuItem
-          key={value}
-          value={value}
-        >{text}</MenuItem>
+        <MenuItem key={value} value={value}>
+          {text}
+        </MenuItem>
       ))}
     </Select>
   </FormControl>

@@ -17,10 +17,10 @@ const styles = (theme: Theme) => ({
 
 const Sidebar = ({ classes }: WithStyles) => (
   <div className={classes.root}>
-    <Optimizations/>
-    <CalculationsCost/>
-    <InvitationsCount/>
-    <Times/>
+    <Optimizations />
+    <CalculationsCost />
+    <InvitationsCount />
+    <Times />
   </div>
 );
 

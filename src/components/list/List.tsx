@@ -18,7 +18,9 @@ export interface ListProps {
 
 function List(props: ListProps) {
   const { invitations, updateInvitation } = props;
-  const { value: { memo, pure, calculationsCost } } = useContext(AppContext);
+  const {
+    value: { memo, pure, calculationsCost },
+  } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : ItemContainer;
   useMemo(() => {
     expensiveCalculations(calculationsCost);
@@ -29,12 +31,12 @@ function List(props: ListProps) {
     <Paper>
       <ListHeader />
       <div>
-      {invitations.map(invitation => (
-        <ItemComponent
-          key={invitation.id}
-          invitation={invitation}
-          updateInvitation={updateInvitation}
-        />
+        {invitations.map(invitation => (
+          <ItemComponent
+            key={invitation.id}
+            invitation={invitation}
+            updateInvitation={updateInvitation}
+          />
         ))}
       </div>
     </Paper>

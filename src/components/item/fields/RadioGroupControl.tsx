@@ -14,14 +14,16 @@ export interface RadioGroupControlProps {
   onChange(_event: ChangeEvent<{}>, value: string): void;
 }
 
-const RadioGroupControl: React.FC<RadioGroupControlProps> = ({ value, options, label, name, onChange }) => (
+const RadioGroupControl: React.FC<RadioGroupControlProps> = ({
+  value,
+  options,
+  label,
+  name,
+  onChange,
+}) => (
   <FormControl>
     <FormLabel component="legend">{label}</FormLabel>
-    <RadioGroup
-      value={value}
-      name={name}
-      onChange={onChange}
-    >
+    <RadioGroup value={value} name={name} onChange={onChange}>
       {options.map((label, key) => (
         <FormControlLabel
           key={key}
