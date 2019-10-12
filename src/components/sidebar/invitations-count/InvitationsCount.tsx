@@ -30,7 +30,7 @@ const InvitationsCount = () => {
   );
   const handleInvitationsCountDouble = useCallback(() => {
     onInvitationsCountChange((invitationsCount * 2).toString());
-  }, [invitationsCount]);
+  }, [invitationsCount, onInvitationsCountChange]);
 
   return (
     <div>
