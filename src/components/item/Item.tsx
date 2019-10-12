@@ -49,44 +49,44 @@ const Item: FC<ItemProps> = props => {
       <Grid container>
         <Grid item xs={12} sm={6} md={4}>
           <TextControl
-            value={name}
             label="Name"
             placeholder="Enter name"
+            value={name}
             onChange={onNameChange}
           />
           <TextControl
-            value={lastName}
             label="Last name"
             placeholder="Enter last name"
+            value={lastName}
             onChange={onLastNameChange}
           />
           <TextControl
-            value={table}
             label="Table"
             placeholder="Enter table number"
             type="number"
+            value={table}
             onChange={onTableChange}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <SelectControl
-            value={sex}
             label="Sex"
             name="sex"
+            value={sex}
             options={GENDERS}
             onChange={onSexChange}
           />
           <CheckboxControl
-            checked={plusOne}
             label="Plus one"
+            checked={plusOne}
             onChange={onPlusOneChange}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <RadioGroupControl
-            value={sendBy.toString()}
             name="sendBy"
             label="Send by"
+            value={sendBy.toString()}
             options={SEND_BY_RADIO_GROUP}
             onChange={onSendByChange}
           />

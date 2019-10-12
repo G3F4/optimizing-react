@@ -26,26 +26,26 @@ const Optimizations = () => {
       <h3>Optimizations</h3>
       <div>
         <FormControlLabel
+          label="PureComponent"
           control={
             <Switch
               color="primary"
               checked={pure}
-              onChange={togglePure}
               className={classes.toggle}
+              onChange={togglePure}
             />
           }
-          label="PureComponent"
         />
         <FormControlLabel
+          label="Memoization"
           control={
             <Switch
               color="primary"
               checked={memo}
-              onChange={toggleMemo}
               className={classes.toggle}
+              onChange={toggleMemo}
             />
           }
-          label="Memoization"
         />
       </div>
     </div>
