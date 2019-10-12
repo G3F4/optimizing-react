@@ -9,7 +9,7 @@ import useList from './useList';
 
 const ItemMemo = memo(Item);
 
-const useListStyles = makeStyles(theme =>
+const useListStyles = makeStyles(() =>
   createStyles({
     root: {
       maxHeight: '100%',

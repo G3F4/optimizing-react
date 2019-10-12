@@ -41,8 +41,7 @@ const styles = (theme: Theme) =>
       maxHeight: '100vh',
       overflowY: 'scroll',
     },
-    listContent: {
-    },
+    listContent: {},
   });
 
 interface State {
