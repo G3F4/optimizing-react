@@ -38,12 +38,21 @@ interface State {
 class App extends Component<WithStyles, State> {
   public state: State = {
     context: {
+      disableRipple: tinyParams(window.location.href).disableRipple || false,
       memo: tinyParams(window.location.href).memo || false,
       pure: tinyParams(window.location.href).pure || false,
       calculationsCost: DEFAULT_CALCULATIONS_COST,
       invitationsCount: DEFAULT_INVITATION_COUNT,
     },
   };
+
+  public toggleDisableRipple = (): void =>
+    this.setState({
+      context: {
+        ...this.state.context,
+        disableRipple: !this.state.context.disableRipple,
+      },
+    });
 
   public toggleMemo = (): void =>
     this.setState({
@@ -87,6 +96,7 @@ class App extends Component<WithStyles, State> {
       <AppContext.Provider
         value={{
           value: context,
+          toggleDisableRipple: this.toggleDisableRipple,
           toggleMemo: this.toggleMemo,
           togglePure: this.togglePure,
           onInvitationsCountChange: this.handleInvitationsCountChange,

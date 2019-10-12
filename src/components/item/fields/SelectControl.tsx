@@ -26,11 +26,11 @@ const SelectControl: React.FC<SelectControlProps> = ({
     <InputLabel htmlFor={name}>{label}</InputLabel>
     <Select
       value={value}
-      onChange={onChange}
       inputProps={{
         name,
         id: name,
       }}
+      onChange={onChange}
     >
       {options.map((text, value) => (
         <MenuItem key={value} value={value}>

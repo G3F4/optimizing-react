@@ -3,7 +3,8 @@ import Grid from '@material-ui/core/Grid/Grid';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Typography from '@material-ui/core/Typography/Typography';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import AppContext from '../../AppContext';
 import { GuestInfo, Invitation } from '../list/useList';
 import CheckboxControl from './fields/CheckboxControl';
 import RadioGroupControl from './fields/RadioGroupControl';
@@ -40,6 +41,9 @@ const Item: FC<ItemProps> = props => {
     onSendByChange,
   } = useItem(props.invitation, props.updateInvitation);
   const classes = useItemStyles();
+  const {
+    value: { disableRipple },
+  } = useContext(AppContext);
   const { guestInfo } = invitation;
   const { name, lastName, sex, plusOne, sendBy, table } = guestInfo;
 
@@ -79,6 +83,7 @@ const Item: FC<ItemProps> = props => {
           <CheckboxControl
             label="Plus one"
             checked={plusOne}
+            disableRipple={disableRipple}
             onChange={onPlusOneChange}
           />
         </Grid>
@@ -88,6 +93,7 @@ const Item: FC<ItemProps> = props => {
             label="Send by"
             value={sendBy.toString()}
             options={SEND_BY_RADIO_GROUP}
+            disableRipple={disableRipple}
             onChange={onSendByChange}
           />
         </Grid>

@@ -22,8 +22,8 @@ const TextControl: React.FC<TextControlProps> = ({
       label={label}
       placeholder={placeholder}
       value={value}
-      onChange={onChange}
       type={type}
+      onChange={onChange}
     />
   </div>
 );

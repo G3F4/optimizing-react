@@ -3,22 +3,24 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
 export interface RadioGroupControlProps {
   value: string;
   label: string;
   name: string;
   options: string[];
+  disableRipple: boolean;
 
   onChange(_event: ChangeEvent<{}>, value: string): void;
 }
 
-const RadioGroupControl: React.FC<RadioGroupControlProps> = ({
+const RadioGroupControl: FC<RadioGroupControlProps> = ({
   value,
   options,
   label,
   name,
+  disableRipple,
   onChange,
 }) => (
   <FormControl>
@@ -26,11 +28,11 @@ const RadioGroupControl: React.FC<RadioGroupControlProps> = ({
     <RadioGroup value={value} name={name} onChange={onChange}>
       {options.map((label, key) => (
         <FormControlLabel
-          key={key}
-          value={key.toString()}
-          label={label}
-          control={<Radio color="primary" />}
           labelPlacement="start"
+          key={key}
+          label={label}
+          value={key.toString()}
+          control={<Radio color="primary" disableRipple={disableRipple} />}
         />
       ))}
     </RadioGroup>

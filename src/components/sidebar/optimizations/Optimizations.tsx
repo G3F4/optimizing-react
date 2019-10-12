@@ -15,7 +15,8 @@ const useOptimizationsStyles = makeStyles(theme =>
 
 const Optimizations = () => {
   const {
-    value: { memo, pure },
+    value: { disableRipple, memo, pure },
+    toggleDisableRipple,
     toggleMemo,
     togglePure,
   } = useContext(AppContext);
@@ -44,6 +45,17 @@ const Optimizations = () => {
               checked={memo}
               className={classes.toggle}
               onChange={toggleMemo}
+            />
+          }
+        />
+        <FormControlLabel
+          label="Disable ripple"
+          control={
+            <Switch
+              color="primary"
+              checked={disableRipple}
+              className={classes.toggle}
+              onChange={toggleDisableRipple}
             />
           }
         />

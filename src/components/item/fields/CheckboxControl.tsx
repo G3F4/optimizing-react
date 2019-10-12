@@ -5,6 +5,7 @@ import React, { ChangeEvent } from 'react';
 export interface CheckboxControlControlProps {
   checked: boolean;
   label: string;
+  disableRipple: boolean;
 
   onChange(event: ChangeEvent<HTMLInputElement>): void;
 }
@@ -12,11 +13,18 @@ export interface CheckboxControlControlProps {
 const CheckboxControl: React.FC<CheckboxControlControlProps> = ({
   checked,
   label,
+  disableRipple,
   onChange,
 }) => (
   <div>
     <FormControlLabel
-      control={<Checkbox checked={checked} onChange={onChange} />}
+      control={
+        <Checkbox
+          checked={checked}
+          onChange={onChange}
+          disableRipple={disableRipple}
+        />
+      }
       label={label}
     />
   </div>
