@@ -1,17 +1,19 @@
-import createStyles from '@material-ui/core/styles/createStyles';
 import Grid from '@material-ui/core/Grid/Grid';
 import Paper from '@material-ui/core/Paper/Paper';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import tinyParams from 'tiny-params';
 import AppContext, {
   AppContextValue,
   DEFAULT_CALCULATIONS_COST,
   DEFAULT_INVITATION_COUNT,
 } from '../AppContext';
-import List from './list/List';
-import Sidebar from './sidebar/Sidebar';
+import Loader from './loader/Loader';
+
+const LazyList = lazy(() => import('./list/List'));
+const LazySidebar = lazy(() => import('./sidebar/Sidebar'));
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -26,9 +28,20 @@ const styles = (theme: Theme) =>
       maxHeight: '100%',
       overflow: 'hidden',
     },
+    sidebar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     list: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100vh',
       maxHeight: '100vh',
       overflowY: 'scroll',
+    },
+    listContent: {
     },
   });
 
@@ -96,11 +109,15 @@ class App extends Component<WithStyles, State> {
       >
         <Paper className={classes.root}>
           <Grid container spacing={2} className={classes.grid}>
-            <Grid item xs={5} sm={4} md={3} lg={2}>
-              <Sidebar />
+            <Grid item xs={5} sm={4} md={3} lg={2} className={classes.sidebar}>
+              <Suspense fallback={<Loader>Loading sidebar...</Loader>}>
+                <LazySidebar />
+              </Suspense>
             </Grid>
             <Grid item xs={7} sm={8} md={9} lg={10} className={classes.list}>
-              <List />
+              <Suspense fallback={<Loader>Loading list...</Loader>}>
+                <LazyList />
+              </Suspense>
             </Grid>
           </Grid>
         </Paper>

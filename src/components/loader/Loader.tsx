@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-const Loader: FC = () => (
+const Loader: FC = ({ children }) => (
   <div className="lds-default">
     <div></div>
     <div></div>
@@ -18,7 +18,7 @@ const Loader: FC = () => (
     <br />
     <br />
     <br />
-    Loading assets...
+    {children || 'Loading assets...'}
   </div>
 );
 
