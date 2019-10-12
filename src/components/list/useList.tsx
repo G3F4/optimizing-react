@@ -13,8 +13,9 @@ const addRenderTime = (time: number): void => {
   if (timesNode && timeNodeClone) {
     timeNodeClone.textContent = `${time} ms`;
     timesNode.prepend(timeNodeClone);
-    Array.from(timesNode.children).forEach((child: any, index) => {
-      child.style.fontSize = `${48 - index * 4}px`;
+    Array.from(timesNode.children).forEach((child, index) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (child as any).style.fontSize = `${48 - index * 4}px`;
     });
   }
 };
@@ -33,7 +34,7 @@ export interface GuestInfo {
   sendBy: number;
 }
 
-const generateInvitation = (_: any, id: number): Invitation => ({
+const generateInvitation = (_: number, id: number): Invitation => ({
   id: id.toString(),
   guestInfo: {
     name: name.firstName(random.number({ min: 0, max: 1 })),
