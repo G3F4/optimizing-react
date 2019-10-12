@@ -3,29 +3,23 @@ import React, { memo, useContext, useMemo } from 'react';
 import AppContext from '../../AppContext';
 import ItemContainer from '../item/ItemContainer';
 import ListHeader from './header/ListHeader';
-import { GuestInfo, Invitation } from './ListConnect';
+import useList from './useList';
 
 const ItemMemo = memo(ItemContainer);
 
-const expensiveCalculations = (length: number): any =>
+const expensiveCalculations = (length: number) => {
   Array.from({ length }, (_v, k) => k).map(expensiveCalculations);
+};
 
-export interface ListProps {
-  invitations: Invitation[];
-
-  updateInvitation(id: string, guestInfo: GuestInfo): void;
-}
-
-function List(props: ListProps) {
-  const { invitations, updateInvitation } = props;
+function List() {
+  const [invitations, updateInvitation] = useList();
   const {
     value: { memo, pure, calculationsCost },
   } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : ItemContainer;
   useMemo(() => {
     expensiveCalculations(calculationsCost);
-    // eslint-disable-next-line
-  }, [memo ? 0 : Date.now()]);
+  }, [memo ? 0 : Date.now()]); // eslint-disable-line
 
   return (
     <Paper>

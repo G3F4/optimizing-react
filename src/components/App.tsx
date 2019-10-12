@@ -9,7 +9,7 @@ import AppContext, {
   DEFAULT_CALCULATIONS_COST,
   DEFAULT_INVITATION_COUNT,
 } from '../AppContext';
-import ListConnect from './list/ListConnect';
+import List from './list/List';
 import Sidebar from './sidebar/Sidebar';
 
 const styles = (theme: Theme) => ({
@@ -97,7 +97,7 @@ class App extends Component<WithStyles, State> {
               <Sidebar />
             </Grid>
             <Grid item xs={7} sm={8} md={9} lg={10} className={classes.list}>
-              <ListConnect />
+              <List />
             </Grid>
           </Grid>
         </Paper>

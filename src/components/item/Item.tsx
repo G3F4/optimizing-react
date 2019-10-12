@@ -3,7 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import React, { ChangeEvent } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import Typography from '@material-ui/core/Typography/Typography';
-import { Invitation } from '../list/ListConnect';
+import { Invitation } from '../list/useList';
 import CheckboxControl from './fields/CheckboxControl';
 import RadioGroupControl from './fields/RadioGroupControl';
 import SelectControl from './fields/SelectControl';

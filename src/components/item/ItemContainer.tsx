@@ -1,6 +1,6 @@
 import produce from 'immer';
 import React, { ChangeEvent, useCallback } from 'react';
-import { GuestInfo, Invitation } from '../list/ListConnect';
+import { GuestInfo, Invitation } from '../list/useList';
 import Item from './Item';
 
 interface ItemContainerProps {

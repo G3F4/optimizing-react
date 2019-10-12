@@ -1,8 +1,7 @@
 import { name, random } from 'faker';
 import produce from 'immer';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import AppContext from '../../AppContext';
-import List from './List';
 
 const getNode = (selector: string) => document.querySelector(selector);
 
@@ -48,7 +47,12 @@ const generateInvitation = (_: any, id: number): Invitation => ({
 
 let timer = Date.now();
 
-const ListConnect = () => {
+export type UseList = [
+  Invitation[],
+  (id: string, guestInfo: GuestInfo) => void,
+];
+
+const useList = (): UseList => {
   const {
     value: { invitationsCount },
   } = useContext(AppContext);
@@ -77,7 +81,7 @@ const ListConnect = () => {
     );
   }, []);
 
-  return <List invitations={invitations} updateInvitation={updateInvitation} />;
+  return [invitations, updateInvitation];
 };
 
-export default ListConnect;
+export default useList;
