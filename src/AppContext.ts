@@ -13,7 +13,7 @@ export interface AppContextValue {
 export interface AppContextProps {
   value: AppContextValue;
   onInvitationsCountChange(length: string): void;
-  onCalculationsCostChange(cost: string): void;
+  onCalculationsCostChange(cost: number): void;
   togglePure(): void;
   toggleMemo(): void;
 }
@@ -26,7 +26,7 @@ const AppContext = createContext<AppContextProps>({
     calculationsCost: DEFAULT_CALCULATIONS_COST,
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onCalculationsCostChange(_cost: string) {
+  onCalculationsCostChange(_cost: number) {
     return;
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -70,11 +70,11 @@ class App extends Component<WithStyles, State> {
     });
   };
 
-  public handleCalculationsCostChange = (cost: string): void => {
+  public handleCalculationsCostChange = (calculationsCost: number): void => {
     this.setState({
       context: {
         ...this.state.context,
-        calculationsCost: parseInt(cost, 10),
+        calculationsCost,
       },
     });
   };

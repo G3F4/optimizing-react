@@ -1,5 +1,8 @@
-import TextField from '@material-ui/core/TextField/TextField';
-import React, { ChangeEvent, useCallback, useContext } from 'react';
+import { IconButton } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Add from '@material-ui/icons/Add';
+import Remove from '@material-ui/icons/Remove';
+import React, { useCallback, useContext } from 'react';
 import AppContext from '../../../AppContext';
 
 const CalculationsCost = () => {
@@ -7,23 +10,23 @@ const CalculationsCost = () => {
     value: { calculationsCost },
     onCalculationsCostChange,
   } = useContext(AppContext);
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      onCalculationsCostChange(event.target.value);
-    },
-    [onCalculationsCostChange],
-  );
+  const handleDecrease = useCallback(() => {
+    onCalculationsCostChange(calculationsCost - 1);
+  }, [calculationsCost, onCalculationsCostChange]);
+  const handleIncrease = useCallback(() => {
+    onCalculationsCostChange(calculationsCost + 1);
+  }, [calculationsCost, onCalculationsCostChange]);
 
   return (
     <div>
       <h3>Calculations cost:</h3>
-      <TextField
-        label="Cost"
-        placeholder="Enter cost"
-        value={calculationsCost}
-        onChange={handleChange}
-        type="number"
-      />
+      <IconButton onClick={handleDecrease}>
+        <Remove />
+      </IconButton>
+      <IconButton disabled>{calculationsCost}</IconButton>
+      <IconButton onClick={handleIncrease}>
+        <Add />
+      </IconButton>
     </div>
   );
 };
