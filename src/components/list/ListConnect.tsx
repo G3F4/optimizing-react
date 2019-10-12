@@ -5,19 +5,17 @@ import AppContext from '../../AppContext';
 import List from './List';
 
 const addRenderTime = (time: number): void => {
-  {
+  // @ts-ignore
+  const timesNode = window.document.querySelector('#times');
+  // @ts-ignore
+  const clone = window.document.querySelector('#time').cloneNode( true );
+  clone.textContent = `${time} ms`;
+  // @ts-ignore
+  timesNode.prepend(clone);
+  Array.from(timesNode!.children).forEach((child, index) => {
     // @ts-ignore
-    const timesNode = window.document.querySelector('#times');
-    // @ts-ignore
-    const clone = window.document.querySelector('#time').cloneNode( true );
-    clone.textContent = `${time} ms`;
-    // @ts-ignore
-    timesNode.prepend(clone);
-    Array.from(timesNode!.children).forEach((child, index) => {
-      // @ts-ignore
-      child.style.fontSize = `${48 - index * 4}px`;
-    });
-  }
+    child.style.fontSize = `${48 - index * 4}px`;
+  });
 };
 
 export interface Invitation {
