@@ -3,34 +3,27 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import createStyles from '@material-ui/core/styles/createStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import React, { useContext } from 'react';
 import AppContext from '../../../AppContext';
 
-const COUNT_GROUP = [10, 50, 100];
+const COUNT_GROUP = [10, 50, 100, 250];
 
-const styles = (theme: Theme) => ({
-  toggle: {
-    marginBottom: theme.spacing(2),
-  },
-  block: {
-    maxWidth: 250,
-  },
-  radioButton: {
-    marginBottom: theme.spacing(2),
-  },
-  root: {
-    height: '100%',
-    margin: theme.spacing(2),
-  },
-});
+const useInvitationCountStyles = makeStyles(theme =>
+  createStyles({
+    radioButton: {
+      marginBottom: theme.spacing(2),
+    },
+  }),
+);
 
-const InvitationsCount = ({ classes }: WithStyles) => {
+const InvitationsCount = () => {
   const {
     value: { invitationsCount },
     onInvitationsCountChange,
   } = useContext(AppContext);
+  const classes = useInvitationCountStyles();
 
   return (
     <div>
@@ -65,4 +58,4 @@ const InvitationsCount = ({ classes }: WithStyles) => {
   );
 };
 
-export default withStyles(styles)(InvitationsCount);
+export default InvitationsCount;

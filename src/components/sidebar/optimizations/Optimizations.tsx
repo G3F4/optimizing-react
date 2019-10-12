@@ -1,22 +1,25 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
+import createStyles from '@material-ui/core/styles/createStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import Switch from '@material-ui/core/Switch';
 import React, { useContext } from 'react';
 import AppContext from '../../../AppContext';
 
-const styles = (theme: Theme) => ({
-  toggle: {
-    marginBottom: theme.spacing(2),
-  },
-});
+const useOptimizationsStyles = makeStyles(theme =>
+  createStyles({
+    toggle: {
+      marginBottom: theme.spacing(2),
+    },
+  }),
+);
 
-const Optimizations = ({ classes }: WithStyles) => {
+const Optimizations = () => {
   const {
     value: { memo, pure },
     toggleMemo,
     togglePure,
   } = useContext(AppContext);
+  const classes = useOptimizationsStyles();
 
   return (
     <div>
@@ -49,4 +52,4 @@ const Optimizations = ({ classes }: WithStyles) => {
   );
 };
 
-export default withStyles(styles)(Optimizations);
+export default Optimizations;

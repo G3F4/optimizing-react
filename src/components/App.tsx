@@ -1,3 +1,4 @@
+import { createStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import Paper from '@material-ui/core/Paper/Paper';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
@@ -12,22 +13,23 @@ import AppContext, {
 import List from './list/List';
 import Sidebar from './sidebar/Sidebar';
 
-const styles = (theme: Theme) => ({
-  root: {
-    minHeight: '100vh',
-    maxHeight: '100vh',
-    margin: theme.spacing(1),
-  },
-  grid: {
-    minHeight: '100vh',
-    maxHeight: '100vh',
-    overflow: 'hidden',
-  },
-  list: {
-    maxHeight: '100vh',
-    overflowY: 'scroll',
-  },
-});
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      minHeight: '100vh',
+      maxHeight: '100vh',
+      margin: theme.spacing(1),
+    },
+    grid: {
+      minHeight: '100vh',
+      maxHeight: '100vh',
+      overflow: 'hidden',
+    },
+    list: {
+      maxHeight: '100vh',
+      overflowY: 'scroll',
+    },
+  });
 
 interface State {
   context: AppContextValue;
@@ -106,5 +108,4 @@ class App extends Component<WithStyles, State> {
   }
 }
 
-// @ts-ignore
 export default withStyles(styles)(App);

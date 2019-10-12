@@ -1,8 +1,9 @@
-import { Paper, Theme, WithStyles } from '@material-ui/core';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React, { ChangeEvent } from 'react';
+import { Paper } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
+import createStyles from '@material-ui/core/styles/createStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import Typography from '@material-ui/core/Typography/Typography';
+import React, { ChangeEvent } from 'react';
 import { Invitation } from '../list/useList';
 import CheckboxControl from './fields/CheckboxControl';
 import RadioGroupControl from './fields/RadioGroupControl';
@@ -12,14 +13,16 @@ import TextControl from './fields/TextControl';
 const SEND_BY_RADIO_GROUP = ['E-mail', 'Fax', 'Postman', 'Owl'];
 const GENDERS = ['Man', 'Woman', 'Gender'];
 
-const styles = (theme: Theme) => ({
-  wrapper: {
-    margin: theme.spacing(1),
-    padding: theme.spacing(1),
-  },
-});
+const useItemStyles = makeStyles(theme =>
+  createStyles({
+    wrapper: {
+      margin: theme.spacing(1),
+      padding: theme.spacing(1),
+    },
+  }),
+);
 
-interface ItemProps extends WithStyles {
+interface ItemProps {
   invitation: Invitation;
 
   onNameChange(event: ChangeEvent<HTMLInputElement>): void;
@@ -34,7 +37,6 @@ interface ItemProps extends WithStyles {
 
 const Item = (props: ItemProps) => {
   const {
-    classes,
     invitation,
     onNameChange,
     onLastNameChange,
@@ -43,6 +45,7 @@ const Item = (props: ItemProps) => {
     onTableChange,
     onSendByChange,
   } = props;
+  const classes = useItemStyles();
   const { guestInfo } = invitation;
   const { name, lastName, sex, plusOne, sendBy, table } = guestInfo;
 
@@ -99,4 +102,4 @@ const Item = (props: ItemProps) => {
   );
 };
 
-export default withStyles(styles)(Item);
+export default Item;
