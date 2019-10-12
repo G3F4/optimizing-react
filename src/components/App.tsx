@@ -16,13 +16,14 @@ import Sidebar from './sidebar/Sidebar';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      minHeight: '100vh',
-      maxHeight: '100vh',
+      minHeight: '100%',
+      maxHeight: '100%',
+      minWidth: '100%',
       margin: theme.spacing(1),
     },
     grid: {
-      minHeight: '100vh',
-      maxHeight: '100vh',
+      minHeight: '100%',
+      maxHeight: '100%',
       overflow: 'hidden',
     },
     list: {
