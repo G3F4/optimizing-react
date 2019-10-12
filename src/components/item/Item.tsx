@@ -3,12 +3,13 @@ import Grid from '@material-ui/core/Grid/Grid';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Typography from '@material-ui/core/Typography/Typography';
-import React, { ChangeEvent } from 'react';
-import { Invitation } from '../list/useList';
+import React, { FC } from 'react';
+import { GuestInfo, Invitation } from '../list/useList';
 import CheckboxControl from './fields/CheckboxControl';
 import RadioGroupControl from './fields/RadioGroupControl';
 import SelectControl from './fields/SelectControl';
 import TextControl from './fields/TextControl';
+import useItem from './useItem';
 
 const SEND_BY_RADIO_GROUP = ['E-mail', 'Fax', 'Postman', 'Owl'];
 const GENDERS = ['Man', 'Woman', 'Gender'];
@@ -25,17 +26,10 @@ const useItemStyles = makeStyles(theme =>
 interface ItemProps {
   invitation: Invitation;
 
-  onNameChange(event: ChangeEvent<HTMLInputElement>): void;
-  onLastNameChange(event: ChangeEvent<HTMLInputElement>): void;
-  onPlusOneChange(event: ChangeEvent<HTMLInputElement>): void;
-  onSexChange(
-    event: ChangeEvent<{ name?: string | undefined; value: unknown }>,
-  ): void;
-  onTableChange(event: ChangeEvent<HTMLInputElement>): void;
-  onSendByChange(_event: ChangeEvent<{}>, value: string): void;
+  updateInvitation(id: string, guestInfo: GuestInfo): void;
 }
 
-const Item = (props: ItemProps) => {
+const Item: FC<ItemProps> = props => {
   const {
     invitation,
     onNameChange,
@@ -44,7 +38,7 @@ const Item = (props: ItemProps) => {
     onSexChange,
     onTableChange,
     onSendByChange,
-  } = props;
+  } = useItem(props.invitation, props.updateInvitation);
   const classes = useItemStyles();
   const { guestInfo } = invitation;
   const { name, lastName, sex, plusOne, sendBy, table } = guestInfo;

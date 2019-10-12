@@ -5,7 +5,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import AppContext from '../../../AppContext';
 
 const COUNT_GROUP = [10, 50, 100, 250];
@@ -24,33 +24,35 @@ const InvitationsCount = () => {
     onInvitationsCountChange,
   } = useContext(AppContext);
   const classes = useInvitationCountStyles();
+  const handleInvitationsCountChange = useCallback(
+    (_e, value) => onInvitationsCountChange(value),
+    [onInvitationsCountChange],
+  );
+  const handleInvitationsCountDouble = useCallback(() => {
+    onInvitationsCountChange((invitationsCount * 2).toString());
+  }, [invitationsCount]);
 
   return (
     <div>
       <h3>Invitations count:</h3>
       <FormControl>
         <RadioGroup
-          onChange={(_e, value) => onInvitationsCountChange(value)}
           aria-label="invitationCount"
           name="invitationCount"
           value={invitationsCount.toString()}
+          onChange={handleInvitationsCountChange}
         >
           {COUNT_GROUP.map((count, key) => (
             <FormControlLabel
               key={key}
-              value={count.toString()}
               label={count}
+              value={count.toString()}
               className={classes.radioButton}
               control={<Radio color="primary" />}
             />
           ))}
         </RadioGroup>
-        <Button
-          onClick={() =>
-            onInvitationsCountChange((invitationsCount * 2).toString())
-          }
-          fullWidth
-        >
+        <Button onClick={handleInvitationsCountDouble} fullWidth>
           Double count
         </Button>
       </FormControl>

@@ -1,11 +1,11 @@
 import Paper from '@material-ui/core/Paper';
 import React, { memo, useContext, useMemo } from 'react';
 import AppContext from '../../AppContext';
-import ItemContainer from '../item/ItemContainer';
+import Item from '../item/Item';
 import ListHeader from './header/ListHeader';
 import useList from './useList';
 
-const ItemMemo = memo(ItemContainer);
+const ItemMemo = memo(Item);
 
 const expensiveCalculations = (length: number) => {
   Array.from({ length }, (_v, k) => k).map(expensiveCalculations);
@@ -16,7 +16,8 @@ function List() {
   const {
     value: { memo, pure, calculationsCost },
   } = useContext(AppContext);
-  const ItemComponent = pure ? ItemMemo : ItemContainer;
+  const ItemComponent = pure ? ItemMemo : Item;
+
   useMemo(() => {
     expensiveCalculations(calculationsCost);
   }, [memo ? 0 : Date.now()]); // eslint-disable-line

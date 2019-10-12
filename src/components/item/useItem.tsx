@@ -1,16 +1,26 @@
 import produce from 'immer';
-import React, { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import { GuestInfo, Invitation } from '../list/useList';
-import Item from './Item';
 
-interface ItemContainerProps {
-  invitation: Invitation;
+interface UseItem {
+  (
+    invitation: Invitation,
+    updateInvitation: (id: string, guestInfo: GuestInfo) => void,
+  ): {
+    invitation: Invitation;
 
-  updateInvitation(id: string, guestInfo: GuestInfo): void;
+    onNameChange(event: ChangeEvent<HTMLInputElement>): void;
+    onLastNameChange(event: ChangeEvent<HTMLInputElement>): void;
+    onPlusOneChange(event: ChangeEvent<HTMLInputElement>): void;
+    onSexChange(
+      event: ChangeEvent<{ name?: string | undefined; value: unknown }>,
+    ): void;
+    onTableChange(event: ChangeEvent<HTMLInputElement>): void;
+    onSendByChange(_event: ChangeEvent<{}>, value: string): void;
+  };
 }
 
-const ItemContainer = (props: ItemContainerProps) => {
-  const { updateInvitation, invitation } = props;
+const useItem: UseItem = (invitation, updateInvitation) => {
   const { id } = invitation;
   const updateGuestInfo = useCallback(
     (guestInfo: GuestInfo) => {
@@ -18,7 +28,7 @@ const ItemContainer = (props: ItemContainerProps) => {
     },
     [id, updateInvitation],
   );
-  const handleNameChange = useCallback(
+  const onNameChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       updateGuestInfo(
         produce(invitation.guestInfo, draft => {
@@ -28,7 +38,7 @@ const ItemContainer = (props: ItemContainerProps) => {
     },
     [updateGuestInfo, invitation.guestInfo],
   );
-  const handleLastNameChange = useCallback(
+  const onLastNameChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       updateGuestInfo(
         produce(invitation.guestInfo, draft => {
@@ -38,7 +48,7 @@ const ItemContainer = (props: ItemContainerProps) => {
     },
     [updateGuestInfo, invitation.guestInfo],
   );
-  const handlePlusOneChange = useCallback(
+  const onPlusOneChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       updateGuestInfo(
         produce(invitation.guestInfo, draft => {
@@ -48,7 +58,7 @@ const ItemContainer = (props: ItemContainerProps) => {
     },
     [updateGuestInfo, invitation.guestInfo],
   );
-  const handleSexChange = useCallback(
+  const onSexChange = useCallback(
     (event: ChangeEvent<{ name?: string | undefined; value: unknown }>) => {
       updateGuestInfo(
         produce(invitation.guestInfo, draft => {
@@ -58,7 +68,7 @@ const ItemContainer = (props: ItemContainerProps) => {
     },
     [updateGuestInfo, invitation.guestInfo],
   );
-  const handleTableChange = useCallback(
+  const onTableChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       updateGuestInfo(
         produce(invitation.guestInfo, draft => {
@@ -68,7 +78,7 @@ const ItemContainer = (props: ItemContainerProps) => {
     },
     [updateGuestInfo, invitation.guestInfo],
   );
-  const handleSendByChange = useCallback(
+  const onSendByChange = useCallback(
     (_event: ChangeEvent<{}>, value: string) => {
       updateGuestInfo(
         produce(invitation.guestInfo, draft => {
@@ -79,17 +89,15 @@ const ItemContainer = (props: ItemContainerProps) => {
     [updateGuestInfo, invitation.guestInfo],
   );
 
-  return (
-    <Item
-      invitation={invitation}
-      onLastNameChange={handleLastNameChange}
-      onNameChange={handleNameChange}
-      onPlusOneChange={handlePlusOneChange}
-      onSendByChange={handleSendByChange}
-      onSexChange={handleSexChange}
-      onTableChange={handleTableChange}
-    />
-  );
+  return {
+    invitation,
+    onLastNameChange,
+    onNameChange,
+    onPlusOneChange,
+    onSendByChange,
+    onSexChange,
+    onTableChange,
+  };
 };
 
-export default ItemContainer;
+export default useItem;
