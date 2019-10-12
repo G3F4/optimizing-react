@@ -24,7 +24,6 @@ const SelectControl: React.FC<SelectControlProps> = ({ label, value, name, optio
         id: name,
       }}
     >
-      {/* tslint:disable-next-line:no-shadowed-variable */}
       {options.map((text, value) => (
         <MenuItem
           key={value}

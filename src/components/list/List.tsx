@@ -18,11 +18,11 @@ export interface ListProps {
 
 function List(props: ListProps) {
   const { invitations, updateInvitation } = props;
-  // tslint:disable-next-line:no-shadowed-variable
   const { value: { memo, pure, calculationsCost } } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : ItemContainer;
   useMemo(() => {
     expensiveCalculations(calculationsCost);
+    // eslint-disable-next-line
   }, [memo ? 0 : Date.now()]);
 
   return (

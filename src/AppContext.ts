@@ -25,9 +25,7 @@ const AppContext = createContext<AppContextProps>({
     invitationsCount: DEFAULT_INVITATION_COUNT,
     calculationsCost: DEFAULT_CALCULATIONS_COST,
   },
-  // tslint:disable-next-line:no-empty
   onCalculationsCostChange(_cost: string) {},
-  // tslint:disable-next-line:no-empty
   onInvitationsCountChange(_length: string) {},
   togglePure: Function,
   toggleMemo: Function,
