@@ -1,128 +1,67 @@
-import Grid from '@material-ui/core/Grid/Grid';
-import Paper from '@material-ui/core/Paper/Paper';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import createStyles from '@material-ui/core/styles/createStyles';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
-import React, { Component, Suspense, lazy } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import tinyParams from 'tiny-params';
 import AppContext, {
   AppContextValue,
   DEFAULT_CALCULATIONS_COST,
   DEFAULT_INVITATION_COUNT,
 } from '../AppContext';
-import Loader from './loader/Loader';
+import Layout from './layout/Layout';
 
-const LazyList = lazy(() => import('./list/List'));
-const LazySidebar = lazy(() => import('./sidebar/Sidebar'));
-
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      minHeight: '100%',
-      maxHeight: '100%',
-      minWidth: '100%',
-      margin: theme.spacing(1),
-    },
-    grid: {
-      minHeight: '100%',
-      maxHeight: '100%',
-      overflow: 'hidden',
-    },
-    sidebar: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    list: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '100vh',
-      maxHeight: '100vh',
-      overflowY: 'scroll',
-    },
-    listContent: {},
+const App: FC = () => {
+  const [context, setContext] = useState<AppContextValue>({
+    memo: tinyParams(window.location.href).memo || false,
+    pure: tinyParams(window.location.href).pure || false,
+    calculationsCost: DEFAULT_CALCULATIONS_COST,
+    invitationsCount: DEFAULT_INVITATION_COUNT,
   });
 
-interface State {
-  context: AppContextValue;
-}
-
-class App extends Component<WithStyles, State> {
-  public state: State = {
-    context: {
-      memo: tinyParams(window.location.href).memo || false,
-      pure: tinyParams(window.location.href).pure || false,
-      calculationsCost: DEFAULT_CALCULATIONS_COST,
-      invitationsCount: DEFAULT_INVITATION_COUNT,
-    },
-  };
-
-  public toggleMemo = (): void =>
-    this.setState({
-      context: {
-        ...this.state.context,
-        memo: !this.state.context.memo,
-      },
+  const toggleMemo = useCallback(() => {
+    setContext({
+      ...context,
+      memo: !context.memo,
     });
+  }, [context, setContext]);
 
-  public togglePure = (): void =>
-    this.setState({
-      context: {
-        ...this.state.context,
-        pure: !this.state.context.pure,
-      },
+  const togglePure = useCallback(() => {
+    setContext({
+      ...context,
+      pure: !context.pure,
     });
+  }, [context, setContext]);
 
-  public handleInvitationsCountChange = (length: string): void => {
-    this.setState({
-      context: {
-        ...this.state.context,
+  const handleInvitationsCountChange = useCallback(
+    (length: string) => {
+      setContext({
+        ...context,
         invitationsCount: parseInt(length, 10),
-      },
-    });
-  };
+      });
+    },
+    [context, setContext],
+  );
 
-  public handleCalculationsCostChange = (calculationsCost: number): void => {
-    this.setState({
-      context: {
-        ...this.state.context,
+  const handleCalculationsCostChange = useCallback(
+    (calculationsCost: number) => {
+      setContext({
+        ...context,
         calculationsCost,
-      },
-    });
-  };
+      });
+    },
+    [context, setContext],
+  );
 
-  public render() {
-    const { classes } = this.props;
-    const { context } = this.state;
+  return (
+    <AppContext.Provider
+      value={{
+        value: context,
+        toggleMemo: toggleMemo,
+        togglePure: togglePure,
+        onInvitationsCountChange: handleInvitationsCountChange,
+        onCalculationsCostChange: handleCalculationsCostChange,
+      }}
+    >
+      <Layout />
+    </AppContext.Provider>
+  );
+};
 
-    return (
-      <AppContext.Provider
-        value={{
-          value: context,
-          toggleMemo: this.toggleMemo,
-          togglePure: this.togglePure,
-          onInvitationsCountChange: this.handleInvitationsCountChange,
-          onCalculationsCostChange: this.handleCalculationsCostChange,
-        }}
-      >
-        <Paper className={classes.root}>
-          <Grid container spacing={2} className={classes.grid}>
-            <Grid item xs={5} sm={4} md={3} lg={2} className={classes.sidebar}>
-              <Suspense fallback={<Loader>Loading sidebar...</Loader>}>
-                <LazySidebar />
-              </Suspense>
-            </Grid>
-            <Grid item xs={7} sm={8} md={9} lg={10} className={classes.list}>
-              <Suspense fallback={<Loader>Loading list...</Loader>}>
-                <LazyList />
-              </Suspense>
-            </Grid>
-          </Grid>
-        </Paper>
-      </AppContext.Provider>
-    );
-  }
-}
-
-export default withStyles(styles)(App);
+export default App;

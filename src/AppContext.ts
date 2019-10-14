@@ -12,6 +12,7 @@ export interface AppContextValue {
 
 export interface AppContextProps {
   value: AppContextValue;
+
   onInvitationsCountChange(length: string): void;
   onCalculationsCostChange(cost: number): void;
   togglePure(): void;

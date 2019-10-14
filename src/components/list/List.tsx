@@ -1,7 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import React, { memo, useContext, useMemo } from 'react';
+import React, { memo, useCallback, useContext } from 'react';
 import AppContext from '../../AppContext';
 import Item from '../item/Item';
 import ListHeader from './header/ListHeader';
@@ -19,8 +19,8 @@ const useListStyles = makeStyles(() =>
   }),
 );
 
-const expensiveCalculations = (length: number) => {
-  Array.from({ length }, (_v, k) => k).map(expensiveCalculations);
+const expensiveCalculations = (length: number): number => {
+  return Array.from({ length }, (_v, k) => k).map(expensiveCalculations).length;
 };
 
 function List() {
@@ -30,22 +30,27 @@ function List() {
   } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : Item;
   const classes = useListStyles();
-
-  useMemo(() => {
-    expensiveCalculations(calculationsCost);
-  }, [memo ? 0 : Date.now()]); // eslint-disable-line
+  const memoizedExpensiveCalculations = useCallback(() => {
+    return expensiveCalculations(calculationsCost);
+  }, [calculationsCost]);
 
   return (
     <Paper className={classes.root}>
       <ListHeader />
       <div>
-        {invitations.map(invitation => (
-          <ItemComponent
-            key={invitation.id}
-            invitation={invitation}
-            updateInvitation={updateInvitation}
-          />
-        ))}
+        {invitations.map(invitation => {
+          memo
+            ? memoizedExpensiveCalculations()
+            : expensiveCalculations(calculationsCost);
+
+          return (
+            <ItemComponent
+              key={invitation.id}
+              invitation={invitation}
+              updateInvitation={updateInvitation}
+            />
+          );
+        })}
       </div>
     </Paper>
   );

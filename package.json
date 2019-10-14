@@ -1,6 +1,6 @@
 {
   "name": "optimizing-react",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "homepage": "http://g3f4.github.io/optimizing-react",
   "dependencies": {
@@ -9,6 +9,7 @@
     "@types/faker": "4.1.6",
     "@types/react": "16.9.5",
     "@types/react-dom": "16.9.1",
+    "cross-env": "6.0.3",
     "faker": "4.1.0",
     "immer": "4.0.1",
     "react": "16.10.2",
@@ -18,7 +19,7 @@
     "typescript": "3.6.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=5000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
