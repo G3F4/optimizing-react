@@ -1,7 +1,7 @@
 import Paper from '@material-ui/core/Paper';
 import createStyles from '@material-ui/core/styles/createStyles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import React, { memo, useCallback, useContext } from 'react';
+import React, { memo, useContext, useMemo } from 'react';
 import AppContext from '../../AppContext';
 import Item from '../item/Item';
 import ListHeader from './header/ListHeader';
@@ -30,7 +30,7 @@ function List() {
   } = useContext(AppContext);
   const ItemComponent = pure ? ItemMemo : Item;
   const classes = useListStyles();
-  const memoizedExpensiveCalculations = useCallback(() => {
+  const memoizedExpensiveCalculations = useMemo(() => {
     return expensiveCalculations(calculationsCost);
   }, [calculationsCost]);
 
@@ -39,8 +39,9 @@ function List() {
       <ListHeader />
       <div>
         {invitations.map(invitation => {
-          memo
-            ? memoizedExpensiveCalculations()
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const work = memo
+            ? memoizedExpensiveCalculations
             : expensiveCalculations(calculationsCost);
 
           return (
